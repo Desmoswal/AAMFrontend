@@ -11,6 +11,10 @@ import { CalendarModule } from 'angular-calendar';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { routing } from './app.routing';
+import { NavbarComponent } from './navbar/navbar.component';
+import { FlightComponent } from './flight/flight.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,11 +23,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FlightwatchComponent,
     AviationHomeComponent,
     CalendarComponent,
+    NavbarComponent,
+    FlightComponent,
   ],
   imports: [
     BrowserModule,
     CalendarModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    routing,
   ],
   providers: [],
   bootstrap: [AppComponent]
