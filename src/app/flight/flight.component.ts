@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Flight} from './flight';
 
 @Component({
   selector: 'app-flight',
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FlightComponent implements OnInit {
 
-  constructor() { }
+  @Input()
+  flight: Flight;
+  constructor() {
+  }
 
   ngOnInit() {
   }
