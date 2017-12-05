@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Flight} from '../../../flight/flight';
+import {Flight} from '../../flight/flight';
 
 @Component({
   selector: 'app-scheduled-flights',
