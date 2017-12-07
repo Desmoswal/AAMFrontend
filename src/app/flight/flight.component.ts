@@ -10,6 +10,7 @@ export class FlightComponent implements OnInit {
 
   @Input()
   flight: Flight;
+
   constructor() {
   }
 
