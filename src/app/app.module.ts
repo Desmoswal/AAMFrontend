@@ -18,6 +18,7 @@ import { SubscriptionListComponent } from './called-components/subscription/subs
 import {FormsModule} from '@angular/forms';
 import { ReserveFlightComponent } from './main-views/reserve-flight/reserve-flight.component';
 import { FlightInformationComponent } from './main-views/flight-information/flight-information.component';
+import {CommonModule} from "@angular/common";
 
 
 
@@ -40,7 +41,8 @@ import { FlightInformationComponent } from './main-views/flight-information/flig
     CalendarModule.forRoot(),
     BrowserAnimationsModule,
     routing,
-    FormsModule
+    FormsModule,
+    CommonModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
