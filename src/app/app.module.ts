@@ -20,7 +20,7 @@ import { ReserveFlightComponent } from './main-views/reserve-flight/reserve-flig
 import { FlightInformationComponent } from './main-views/flight-information/flight-information.component';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { LegComponent } from './called-components/leg/leg.component';
-
+import {CommonModule} from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -43,7 +43,8 @@ import { LegComponent } from './called-components/leg/leg.component';
     BrowserAnimationsModule,
     AngularFontAwesomeModule,
     routing,
-    FormsModule
+    FormsModule,
+    CommonModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -6,10 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./reserve-flight.component.css']
 })
 export class ReserveFlightComponent implements OnInit {
-
+  message: string;
   constructor() { }
 
   ngOnInit() {
+  }
+  receiveMessage($event) {
+    this.message = $event;
   }
 
 }
