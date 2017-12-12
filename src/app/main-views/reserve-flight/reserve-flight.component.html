@@ -4,14 +4,13 @@
   </div>
   <body>
   <div class="row">
-  <div class="col">
-    <app-calendar (messageEvent)='receiveMessage($event)'></app-calendar>
-    <p>{{message}}</p>
-  </div>
-  <div class="col">
-    <p>Stuff goes here</p>
-  </div>
-  </div>
+    <div class="col-md-7">
+      <app-calendar (dateEvent)="receiveDate($event)"></app-calendar>
+      <p>{{selectedDate}}</p>
+    </div>
+    <div class="col-md-5">
+      <p>Stuff goes here</p>
+    </div></div>
   </body>
 </div>
 
