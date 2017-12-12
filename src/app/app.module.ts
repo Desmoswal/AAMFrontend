@@ -18,7 +18,8 @@ import { SubscriptionListComponent } from './called-components/subscription/subs
 import {FormsModule} from '@angular/forms';
 import { ReserveFlightComponent } from './main-views/reserve-flight/reserve-flight.component';
 import { FlightInformationComponent } from './main-views/flight-information/flight-information.component';
-
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { LegComponent } from './called-components/leg/leg.component';
 
 
 @NgModule({
@@ -33,12 +34,14 @@ import { FlightInformationComponent } from './main-views/flight-information/flig
     SubscriptionComponent,
     SubscriptionListComponent,
     ReserveFlightComponent,
-    FlightInformationComponent
+    FlightInformationComponent,
+    LegComponent
   ],
   imports: [
     BrowserModule,
     CalendarModule.forRoot(),
     BrowserAnimationsModule,
+    AngularFontAwesomeModule,
     routing,
     FormsModule
   ],

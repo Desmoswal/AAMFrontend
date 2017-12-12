@@ -1,10 +1,14 @@
 
-
-<tr class="table-danger">
-  <td>{{flight.regNo}}</td>
-  <td>Boarding</td>
-  <td>15:00</td>
-  <td>15:30</td>
-  <td>{{flight.notes}}</td>
-</tr>
+<body class = "flight-border">
+  <div><h3>Flight No:{{flight.flightNo}}</h3>
+  <div class="wrapper">
+      <div class="tab">
+        <input id="tab-one" type="checkbox" name="tabs">
+        <label for="tab-one">Details <i class="expandable positive fa fa-plus-circle fa-2x " aria-hidden="true"></i></label>
+        <div class="tab-content">
+        Flight Legs
+        </div>
+      </div>
+  </div></div>
+</body>
 
