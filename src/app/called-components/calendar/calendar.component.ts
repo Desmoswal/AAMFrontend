@@ -1,6 +1,6 @@
 import {
-  Component,
-  OnInit
+  Component, EventEmitter,
+  OnInit, Output
 } from '@angular/core';
 import {
   CalendarEvent,
@@ -24,11 +24,12 @@ import {
 
 export class CalendarComponent {
 
-  view: string = 'month';
-
   viewDate: Date = new Date();
 
-  events: CalendarEvent[] = [];
+  @Output() messageEvent = new EventEmitter<string>();
+  constructor() {}
 
-  clickedDate: Date;
+  dayClicked({date, events}:{date: Date; events: CalendarEvent []}) {
+    this.messageEvent.emit(date.toDateString());
+  }
 }

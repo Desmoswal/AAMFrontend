@@ -4,8 +4,8 @@
   </div>
   <body>
   <div class="col-md-8">
-
-    <app-calendar></app-calendar>
+    <app-calendar (messageEvent)='receiveMessage($event)'></app-calendar>
+    <p>{{message}}</p>
   </div>
   <div class="col-md-4">
     <p>Stuff goes here</p>
