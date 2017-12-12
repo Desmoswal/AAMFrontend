@@ -21,6 +21,7 @@ import { FlightInformationComponent } from './main-views/flight-information/flig
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { LegComponent } from './called-components/leg/leg.component';
 import {CommonModule} from '@angular/common';
+import { CalAlertComponent } from './called-components/cal-alert/cal-alert.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import {CommonModule} from '@angular/common';
     SubscriptionListComponent,
     ReserveFlightComponent,
     FlightInformationComponent,
-    LegComponent
+    LegComponent,
+    CalAlertComponent
   ],
   imports: [
     BrowserModule,
