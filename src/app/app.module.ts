@@ -22,6 +22,7 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { LegComponent } from './called-components/leg/leg.component';
 import {CommonModule} from '@angular/common';
 import { CalAlertComponent } from './called-components/cal-alert/cal-alert.component';
+import {DateStringService} from './shared/date-string-service';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,7 @@ import { CalAlertComponent } from './called-components/cal-alert/cal-alert.compo
     FormsModule,
     CommonModule,
   ],
-  providers: [],
+  providers: [DateStringService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

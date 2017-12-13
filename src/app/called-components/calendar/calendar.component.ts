@@ -5,16 +5,10 @@ import {
 import {
   CalendarEvent,
 } from 'angular-calendar';
-import {
-  startOfDay,
-  endOfDay,
-  subDays,
-  addDays,
-  endOfMonth,
-  isSameDay,
-  isSameMonth,
-  addHours
-} from 'date-fns';
+import {ActivatedRoute, Router} from '@angular/router';
+import 'rxjs/add/operator/switchMap';
+import {DateStringService} from '../../shared/date-string-service';
+
 
 @Component({
   selector: 'app-calendar',
@@ -22,16 +16,21 @@ import {
   styleUrls: ['./calendar.component.css']
 })
 
-export class CalendarComponent {
+export class CalendarComponent implements OnInit {
 
   view: string = 'month';
   viewDate: Date = new Date();
 
-  @Output() dateEvent = new EventEmitter<string>();
-  constructor() {}
+  @Output() dateEvent = new EventEmitter<Date>();
 
-  dayClicked({date, events}: {date: Date; events: CalendarEvent []}) {
-    const day = (date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()).toString();
-    this.dateEvent.emit(day);
+  constructor(private route: ActivatedRoute,
+              private router: Router) {
+  }
+
+  ngOnInit() {
+  }
+
+  dayClicked({date, events}: { date: Date; events: CalendarEvent [] }) {
+    this.dateEvent.emit(date);
   }
 }

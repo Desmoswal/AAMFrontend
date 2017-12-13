@@ -6,9 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./reserve-flight.component.css']
 })
 export class ReserveFlightComponent implements OnInit {
-  selectedDate: string;
+  selectedDate: Date;
   constructor() { }
-
   ngOnInit() {
   }
   receiveDate($event) {

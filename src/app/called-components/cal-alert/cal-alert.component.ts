@@ -1,4 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {DateStringService} from '../../shared/date-string-service';
+import {ActivatedRoute} from '@angular/router';
+import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: 'app-cal-alert',
@@ -7,12 +10,24 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class CalAlertComponent implements OnInit {
 
-  @Input() recievedDate: string;
+  protected _dateString: string;
 
-  constructor() { }
-
-  ngOnInit() {
-    console.log(this.recievedDate);
+  constructor(private dateServ: DateStringService,
+              private route: ActivatedRoute) {
   }
 
+  ngOnInit() {
+
+  }
+
+  @Input() set recievedDate(date: Date) {
+    if (date != null) {
+      this._dateString = this.dateServ.dateToString(date);
+    }
+    else {
+      this.route.queryParams.subscribe(params => {
+        this._dateString = params.date;
+      });
+    }
+  }
 }
