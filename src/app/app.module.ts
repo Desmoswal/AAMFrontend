@@ -8,9 +8,9 @@ import { LoginComponent } from './main-views/login/login.component';
 import { HomeComponent } from './main-views/home/home.component';
 import { CalendarComponent } from './called-components/calendar/calendar.component';
 import { CalendarModule } from 'angular-calendar';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { routing } from './app.routing';
+
 import { NavbarComponent } from './called-components/navbar/navbar.component';
 import { FlightComponent } from './called-components/flight/flight.component';
 import { MapComponent } from './called-components/map/map.component';
@@ -24,6 +24,7 @@ import {CommonModule} from '@angular/common';
 import { FlightListComponent } from './called-components/flight-list/flight-list.component';
 import {FlightService} from './shared/flights/flight.service';
 import {HttpClient, HttpClientModule, HttpHandler} from '@angular/common/http';
+import { CalAlertComponent } from './called-components/cal-alert/cal-alert.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import {HttpClient, HttpClientModule, HttpHandler} from '@angular/common/http';
     ReserveFlightComponent,
     FlightInformationComponent,
     LegComponent,
-    FlightListComponent
+    FlightListComponent,
+    CalAlertComponent
   ],
   imports: [
     BrowserModule,

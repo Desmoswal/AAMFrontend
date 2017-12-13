@@ -24,12 +24,14 @@ import {
 
 export class CalendarComponent {
 
+  view: string = 'month';
   viewDate: Date = new Date();
 
-  @Output() messageEvent = new EventEmitter<string>();
+  @Output() dateEvent = new EventEmitter<string>();
   constructor() {}
 
-  dayClicked({date, events}:{date: Date; events: CalendarEvent []}) {
-    this.messageEvent.emit(date.toDateString());
+  dayClicked({date, events}: {date: Date; events: CalendarEvent []}) {
+    const day = (date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()).toString();
+    this.dateEvent.emit(day);
   }
 }
