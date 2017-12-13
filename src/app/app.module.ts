@@ -21,6 +21,9 @@ import { FlightInformationComponent } from './main-views/flight-information/flig
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { LegComponent } from './called-components/leg/leg.component';
 import {CommonModule} from '@angular/common';
+import { FlightListComponent } from './called-components/flight-list/flight-list.component';
+import {FlightService} from './shared/flights/flight.service';
+import {HttpClient, HttpClientModule, HttpHandler} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,8 @@ import {CommonModule} from '@angular/common';
     SubscriptionListComponent,
     ReserveFlightComponent,
     FlightInformationComponent,
-    LegComponent
+    LegComponent,
+    FlightListComponent
   ],
   imports: [
     BrowserModule,
@@ -45,8 +49,10 @@ import {CommonModule} from '@angular/common';
     routing,
     FormsModule,
     CommonModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [FlightService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
