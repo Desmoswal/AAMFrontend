@@ -8,9 +8,9 @@ import { LoginComponent } from './main-views/login/login.component';
 import { HomeComponent } from './main-views/home/home.component';
 import { CalendarComponent } from './called-components/calendar/calendar.component';
 import { CalendarModule } from 'angular-calendar';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { routing } from './app.routing';
+
 import { NavbarComponent } from './called-components/navbar/navbar.component';
 import { FlightComponent } from './called-components/flight/flight.component';
 import { MapComponent } from './called-components/map/map.component';
@@ -21,10 +21,12 @@ import { FlightInformationComponent } from './main-views/flight-information/flig
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { LegComponent } from './called-components/leg/leg.component';
 import {CommonModule} from '@angular/common';
+import { FlightListComponent } from './called-components/flight-list/flight-list.component';
+import {HttpClientModule} from '@angular/common/http';
 import { CalAlertComponent } from './called-components/cal-alert/cal-alert.component';
 import {DateStringService} from './shared/date-string-service';
 import {FlightService} from './shared/flights/flight.service';
-import {HttpModule} from '@angular/http';
+import { NoFlightAlertComponent } from './called-components/no-flight-alert/no-flight-alert.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import {HttpModule} from '@angular/http';
     ReserveFlightComponent,
     FlightInformationComponent,
     LegComponent,
-    CalAlertComponent
+    FlightListComponent,
+    CalAlertComponent,
+    NoFlightAlertComponent
   ],
   imports: [
     BrowserModule,
@@ -50,9 +54,10 @@ import {HttpModule} from '@angular/http';
     routing,
     FormsModule,
     CommonModule,
-    HttpModule
+    HttpClientModule
   ],
   providers: [DateStringService, FlightService],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

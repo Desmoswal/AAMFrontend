@@ -2,4 +2,7 @@
   <div *ngIf="dateHasFlights()">
     <app-flight></app-flight>
   </div>
+  <div *ngIf="!dateHasFlights()">
+    <app-no-flight-alert></app-no-flight-alert>
+  </div>
 </div>

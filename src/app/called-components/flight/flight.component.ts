@@ -9,20 +9,9 @@ import {DatePipe} from '@angular/common';
 })
 
 export class FlightComponent implements OnInit {
-  // @Input
-  flight: Flight;
+  @Input() flight: Flight;
   constructor() {
-    this.flight = {
-      id: 0,
-      flightNo: '601',
-      totalSeats: 16,
-      seatsAvailable: 5,
-      regNo: '123',
-      notes: 'This is a flight',
-      flightDuration: new Date('February 4, 2016 10:13:00'),
-      totalDelay: new DatePipe('en-US'),
-      legs: []
-    };
+
   }
 ngOnInit() {
   }

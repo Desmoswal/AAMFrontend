@@ -15,8 +15,7 @@ export class CalAlertComponent implements OnInit {
   protected _dateString: string;
 
   constructor(private dateServ: DateStringService,
-              private route: ActivatedRoute,
-              private flightServ: FlightService) {
+              private route: ActivatedRoute) {
   }
 
   ngOnInit() {
@@ -33,5 +32,7 @@ export class CalAlertComponent implements OnInit {
     }
   }
 
-
+  dateHasFlights() {
+    return false;
+  }
 }

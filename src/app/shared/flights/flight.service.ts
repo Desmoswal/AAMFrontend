@@ -3,7 +3,7 @@ import {environment} from '../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {Flight} from './flight.model';
-const url = environment.apiEndpoint + 'flights';
+const url = environment.apiEndpoint + '/flight';
 
 @Injectable()
 export class FlightService {
@@ -19,6 +19,7 @@ export class FlightService {
   }
 
   getByDate(date: string): Observable<Flight[]> {
-    return this.http.get<Flight[]>(url + '/' + date);
+
+    return this.http.get<Flight[]>(url + '/bydate/' + date);
   }
 }
