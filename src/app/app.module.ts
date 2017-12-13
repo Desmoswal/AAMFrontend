@@ -23,7 +23,7 @@ import { LegComponent } from './called-components/leg/leg.component';
 import {CommonModule} from '@angular/common';
 import { FlightListComponent } from './called-components/flight-list/flight-list.component';
 import {FlightService} from './shared/flights/flight.service';
-import {HttpClient, HttpClientModule, HttpHandler} from '@angular/common/http';
+import {HttpClientModule} from '@angular/common/http';
 import { CalAlertComponent } from './called-components/cal-alert/cal-alert.component';
 
 @NgModule({

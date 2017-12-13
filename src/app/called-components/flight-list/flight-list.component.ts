@@ -18,9 +18,6 @@ export class FlightListComponent implements OnInit {
         this.flights = flight;
       }
     );
-    for (let i = 0; i < this.flights.length; i++) {
-      console.log(this.flights[i].flightNo);
-    }
   }
 
   ngOnInit() {
