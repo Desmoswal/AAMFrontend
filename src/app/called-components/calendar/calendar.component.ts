@@ -20,7 +20,6 @@ export class CalendarComponent implements OnInit {
 
   view: string = 'month';
   viewDate: Date = new Date();
-
   @Output() dateEvent = new EventEmitter<Date>();
 
   constructor(private route: ActivatedRoute,
@@ -29,6 +28,7 @@ export class CalendarComponent implements OnInit {
 
   ngOnInit() {
   }
+
 
   dayClicked({date, events}: { date: Date; events: CalendarEvent [] }) {
     this.dateEvent.emit(date);

@@ -23,6 +23,8 @@ import { LegComponent } from './called-components/leg/leg.component';
 import {CommonModule} from '@angular/common';
 import { CalAlertComponent } from './called-components/cal-alert/cal-alert.component';
 import {DateStringService} from './shared/date-string-service';
+import {FlightService} from './shared/flights/flight.service';
+import {HttpModule} from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -48,8 +50,9 @@ import {DateStringService} from './shared/date-string-service';
     routing,
     FormsModule,
     CommonModule,
+    HttpModule
   ],
-  providers: [DateStringService],
+  providers: [DateStringService, FlightService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

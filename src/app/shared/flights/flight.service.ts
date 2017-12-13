@@ -18,7 +18,7 @@ export class FlightService {
     return this.http.get<Flight[]>(url + '/' + id);
   }
 
-  getByDate(date: Date): Observable<Flight[]> {
+  getByDate(date: string): Observable<Flight[]> {
     return this.http.get<Flight[]>(url + '/' + date);
   }
 }

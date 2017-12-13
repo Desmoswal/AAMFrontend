@@ -1,3 +1,5 @@
-<h3>
-  {{_dateString}}
-</h3>
+<div class="container">
+  <div *ngIf="dateHasFlights()">
+    <app-flight></app-flight>
+  </div>
+</div>
