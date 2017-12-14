@@ -1,0 +1,17 @@
+<div class="container">
+  <div>
+    <app-navbar></app-navbar>
+  </div>
+  <body>
+  <div class="row">
+    <div class="col-md-7">
+      <app-calendar (dateEvent)="receiveDate($event)"></app-calendar>
+    </div>
+    <div class="col-md-5">
+      <app-cal-alert [recievedDate]="selectedDate"></app-cal-alert>
+    </div>
+  </div>
+  </body>
+</div>
+
+
