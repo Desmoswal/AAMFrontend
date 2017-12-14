@@ -2,8 +2,7 @@
   <div>
     <app-navbar></app-navbar>
   </div>
-  <body>
-  <div class="row">
+  <div class="row viewbody">
     <div class="col-md-7">
       <app-calendar (dateEvent)="receiveDate($event)"></app-calendar>
     </div>
@@ -11,7 +10,6 @@
       <app-cal-alert [recievedDate]="selectedDate"></app-cal-alert>
     </div>
   </div>
-  </body>
 </div>
 
 

@@ -2,7 +2,7 @@
   <div>
     <app-navbar></app-navbar>
   </div>
-  <body>
+  <div class="viewbody">
     <div>
       <h1>Today's Scheduled flights</h1>
       <app-flight-list [getType]="userType" [inputDate] = "today"></app-flight-list>
@@ -11,6 +11,6 @@
       <h1>Flight Watch</h1>
       <app-subscription-list></app-subscription-list>
     </div>
-  </body>
+  </div>
 </div>
 
