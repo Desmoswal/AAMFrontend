@@ -6,5 +6,8 @@
   <div *ngFor="let flighthtml of flights" class="list-group-item list-group-item-action">
     <app-flight [flight]="flighthtml"></app-flight>
   </div>
+  <div *ngIf="noFlights">
+    <p>No flights scheduled</p>
+  </div>
 </div>
 

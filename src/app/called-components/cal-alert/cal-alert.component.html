@@ -1,7 +1,4 @@
 <div class="container">
-  {{_dateString}}
-  <br>
-  {{recDate | date: 'yyyy/MM/dd'}}
   <div *ngIf="dateHasFlights()">
     <app-flight></app-flight>
   </div>

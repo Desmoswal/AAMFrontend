@@ -1,0 +1,30 @@
+<div class="row text-center">
+  <div class="col">
+    {{leg.deptLocation}}
+  </div>
+  <div class="col">
+    {{leg.arrLocation}}
+  </div>
+  <div class="col">
+    {{leg.sta |date: "h:mm a"}}
+  </div>
+  <div class="col">
+    {{leg.std |date: "h:mm a"}}
+  </div>
+  <div class="col">
+    {{leg.toff |date: "h:mm a"}}
+  </div>
+  <div class="col">
+    {{leg.tdown |date: "h:mm a"}}
+  </div>
+  <div *ngIf="isDelayed" class="col" style="color: red">
+    {{_delay}}
+  </div>
+  <div *ngIf="!isDelayed" class="col" style="color: green">
+    {{_delay}}
+  </div>
+</div>
+
+
+
+

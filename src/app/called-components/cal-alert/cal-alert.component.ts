@@ -27,16 +27,7 @@ export class CalAlertComponent implements OnInit {
   @Input() set recievedDate(date: Date) {
 
     if (date != null) {
-      // this._dateString = date.getUTCFullYear() +
-      //   ('00' + (date.getUTCMonth() + 1)).slice(-2) +
-      //   ('00' + date.getUTCDate()).slice(-2);
-      //
-      //
-      // this.recDate = date;
-      // //this._dateString = this.dateServ.dateToString(date);
-
       this._dateString = this.datePipe.transform(date, 'yyyyMMdd');
-
     }
     else {
       this.route.queryParams.subscribe(params => {

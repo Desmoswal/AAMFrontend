@@ -1,86 +1,10 @@
-.expandable {
-  float: left;
-  margin-top: 7px;
-  margin-bottom: 7px;
-  margin-right: 7px;
+/deep/ ngb-accordion > div.card {
+  border-radius: 0;
+  padding: 0;
 }
 
-.positive {
-  color: #17BC9A;
-}
-
-.negative {
-  color: #D68A1D;
-}
-
-.warning {
-  color: #EA5147;
-}
-
-.flight-border
-{
-  padding-top: 0px;
-}
-
-
-body {
-  color: #2c3e50;
-  background: #ecf0f1;
-}
-
-/* Acordeon styles */
-.tab {
-  width: 100%;
-  color: #fff;
-  overflow: hidden;
-  align-content: center;
-}
-
-label {
-  position: relative;
-  display: block;
-  padding: 0 0 0 1em;
-  background: #2C3F50;
+.heading{
+  color: darkorange;
   font-weight: bold;
-  line-height: 3;
-  cursor: pointer;
-}
-
-label:hover {
-  background: #415261;
-}
-
-.blue label {
-  background: #2C3F50;
-}
-
-.tab-content {
-  max-height: 0;
-  overflow: hidden;
-  background: #2C3F50;
-  -webkit-transition: max-height .35s;
-  -o-transition: max-height .35s;
-  transition: max-height .35s;
-}
-
-.blue .tab-content {
-  background: #2C3F50;
-}
-
-.tab-content p {
-  margin: 1em;
-}
-
-/* :checked */
-
-/* Icon */
-
-input {
-  position: absolute;
-  opacity: 0;
-  z-index: -1;
-}
-
-input:checked ~ .tab-content {
-  max-height: 10em;
+  margin-bottom: .5em;
 }

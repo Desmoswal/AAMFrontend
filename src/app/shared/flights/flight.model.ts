@@ -11,8 +11,8 @@ export class Flight {
   seatsAvailable: number;
   regNo: string;
   notes?: string;
-  flightDuration: Date;
-  totalDelay: DatePipe;
+  flightDuration: string;
+  totalDelay: string;
   legs?: Leg[];
   legIds?: number[];
   users: User[];
