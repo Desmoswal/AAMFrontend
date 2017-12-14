@@ -22,6 +22,9 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { LegComponent } from './called-components/leg/leg.component';
 import {CommonModule} from '@angular/common';
 import { CalAlertComponent } from './called-components/cal-alert/cal-alert.component';
+import { ReserveFormDetailComponent } from './main-views/reserve-form-detail/reserve-form-detail.component';
+import {EmailService} from "./shared/email/email.service";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -37,7 +40,8 @@ import { CalAlertComponent } from './called-components/cal-alert/cal-alert.compo
     ReserveFlightComponent,
     FlightInformationComponent,
     LegComponent,
-    CalAlertComponent
+    CalAlertComponent,
+    ReserveFormDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -47,8 +51,11 @@ import { CalAlertComponent } from './called-components/cal-alert/cal-alert.compo
     routing,
     FormsModule,
     CommonModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    EmailService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

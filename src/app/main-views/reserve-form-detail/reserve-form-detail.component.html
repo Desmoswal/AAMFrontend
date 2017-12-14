@@ -1,0 +1,214 @@
+<div class="container viewbody">
+  <div>
+    <app-navbar></app-navbar>
+  </div>
+  <form method="post" name="form" (ngSubmit)="f.form.valid && send()" #f="ngForm">
+    <div class="row">
+      <div class="col-sm-4">
+        <label>Asset</label>
+      </div>
+      <div class="col-sm-8">
+          <select name="asset" [(ngModel)]="model.asset" #asset="ngModel">
+            <option value="asset1">asset1</option>
+            <option value="asset2">asset2</option>
+            <option value="asset3">asset3</option>
+          </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4">
+        <label>Department</label>
+      </div>
+      <div class="col-sm-8">
+        <select name="department" [(ngModel)]="model.department" #department="ngModel">
+          <option value="dep1">department1</option>
+          <option value="dep2">department2</option>
+          <option value="dep3">department3</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4">
+        <label>Job Category</label>
+      </div>
+      <div class="col-sm-8">
+        <select name="jobcat" [(ngModel)]="model.jobcat">
+          <option value="cat1">category1</option>
+          <option value="cat1">category2</option>
+          <option value="cat1">category3</option>
+          <option value="cat1">category4</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4">
+        <label>Plant</label>
+      </div>
+      <div class="col-sm-8">
+        <select name="plant"[(ngModel)]="model.plant">
+          <option value="plant1">plant1</option>
+          <option value="plant2">plant2</option>
+          <option value="plant3">plant3</option>
+          <option value="plant4">plant4</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4">
+        <label>Work Destination</label>
+      </div>
+      <div class="col-sm-8">
+        <select name="wdest" [(ngModel)]="model.wdest">
+          <option value="wdest1">workdestination1</option>
+          <option value="wdest2">workdestination2</option>
+          <option value="wdest3">workdestination3</option>
+          <option value="wdest4">workdestination4</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4">
+        <label>Priority</label>
+      </div>
+      <div class="col-sm-8">
+        <select name="priority" [(ngModel)]="model.priority">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4">
+        <label>Tollgate fulfilled</label>
+      </div>
+      <div class="col-sm-8" >
+        <select name="tollgate" [(ngModel)]="model.tollgate">
+          <option value="yes">yes</option>
+          <option value="no">no</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4">
+        <label>Material Status</label>
+      </div>
+      <div class="col-sm-8">
+        <input type="textbox" name="materialstatus" size="30" [(ngModel)]="model.materialstatus" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4">
+        <label>Focal unique ID</label>
+      </div>
+      <div class="col-sm-8">
+        <input type="textbox" name="focalid" size="30" [(ngModel)]="model.focalid" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4">
+        <label>Work Order</label>
+      </div>
+      <div class="col-sm-8">
+        <input type="textbox" name="workorder" size="30" [(ngModel)]="model.workorder" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4">
+        <label>System number</label>
+      </div>
+      <div class="col-sm-8">
+        <select name="systemnumber" [(ngModel)]="model.systemnumber">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4">
+        <label>Scope of Work</label>
+      </div>
+      <div class="col-sm-8">
+        <input type="textbox" name="scopeofwork" size="30" [(ngModel)]="model.scopeofwork" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4">
+        <label>Service boat required</label>
+      </div>
+      <div class="col-sm-8">
+        <input type="checkbox" name="serviceboat" [(ngModel)]="model.serviceboat" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4">
+        <label>Earliest Start</label>
+      </div>
+      <div class="col-sm-8">
+        <input type="textbox" name="earlieststart" size="30" [(ngModel)]="model.earlieststart" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4">
+        <label>Latest Finish</label>
+      </div>
+      <div class="col-sm-8">
+        <input type="textbox" name="latestfinish" size="30" [(ngModel)]="model.latestfinish" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4">
+        <label>Duration</label>
+      </div>
+      <div class="col-sm-8">
+        <input type="textbox" name="workduration" size="10" [(ngModel)]="model.workduration" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4">
+        <label>Workshift</label>
+      </div>
+      <div class="col-sm-8">
+        <select name="workshift" [(ngModel)]="model.workshift">
+          <option value="day">Day</option>
+          <option value="night">Night</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4">
+        <label>WBS Element</label>
+      </div>
+      <div class="col-sm-8">
+        <input type="textbox" name="wbselement" size="20" [(ngModel)]="model.wbselement" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4">
+        <label>Offshore contact</label>
+      </div>
+      <div class="col-sm-8">
+        <input type="textbox" name="offs-contact" size="30" [(ngModel)]="model.offscontact" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4">
+        <label>Prod. Assist.</label>
+      </div>
+      <div class="col-sm-8">
+        <input type="checkbox" name="prodassist" [(ngModel)]="model.prodassist" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">
+
+      </div>
+      <div class="col-sm-4">
+        <input type="submit" class="btn btn-primary" value="Submit" />
+      </div>
+
+    </div>
+  </form>
+</div>
