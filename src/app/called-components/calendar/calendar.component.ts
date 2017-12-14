@@ -22,8 +22,7 @@ export class CalendarComponent implements OnInit {
   viewDate: Date = new Date();
   @Output() dateEvent = new EventEmitter<Date>();
 
-  constructor(private route: ActivatedRoute,
-              private router: Router) {
+  constructor() {
   }
 
   ngOnInit() {

@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {EmailService} from "../../shared/email/email.service";
 import {Email} from "../../shared/email/email.model";
-import {isBoolean} from "util";
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-reserve-form-detail',
@@ -11,15 +11,19 @@ import {isBoolean} from "util";
 })
 export class ReserveFormDetailComponent implements OnInit {
 
-  model: any = new Array();
+  @Input() reserveDate;
+  @Input() reserveFlight;
 
-  constructor(private router:Router, private service:EmailService) { }
+  model: any = new Array();
+  date: string;
+
+  constructor(private router:Router, private service:EmailService, private datePipe: DatePipe) { }
 
   ngOnInit() {
+    this.date = this.datePipe.transform(new Date(), 'yyyyMMdd');
   }
 
   send() {
-  //console.log("hellow :3");
   var content = new Map();
     var assignedtitles = new Map();
   let titles = [

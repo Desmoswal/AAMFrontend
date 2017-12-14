@@ -29,6 +29,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ReserveFormDetailComponent} from './main-views/reserve-form-detail/reserve-form-detail.component';
 import {EmailService} from './shared/email/email.service';
 import {LegListComponent} from './called-components/legs/leg-list/leg-list.component';
+import {AgmCoreModule} from '@agm/core';
 
 
 @NgModule({
@@ -60,7 +61,10 @@ import {LegListComponent} from './called-components/legs/leg-list/leg-list.compo
     FormsModule,
     CommonModule,
     HttpClientModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBdpXUElCLoC1Nf397cIzvM64Ho9YdXxxk'
+    })
   ],
   providers: [DateStringService, FlightService, SubscriptionService, DatePipe, EmailService],
 

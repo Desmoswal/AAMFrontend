@@ -3,6 +3,7 @@ import {Flight} from '../../../shared/flights/flight.model';
 import {FlightService} from '../../../shared/flights/flight.service';
 import {DatePipe} from '@angular/common';
 import {getType} from '@angular/core/src/errors';
+import {isNullOrUndefined} from 'util';
 
 @Component({
   selector: 'app-flight-list',
@@ -15,6 +16,9 @@ export class FlightListComponent implements OnInit {
   noFlights = false;
   @Input() inputDate: Date;
   @Input() getType: number;
+
+  @Input() inputFlights;
+
 
   constructor(private flightServ: FlightService, private datePipe: DatePipe) {
   }
@@ -54,6 +58,11 @@ export class FlightListComponent implements OnInit {
           }
         }
       );
+    }
+
+    //when the list of flights are already provided
+    else {
+      this.flights = this.inputFlights;
     }
 
   }

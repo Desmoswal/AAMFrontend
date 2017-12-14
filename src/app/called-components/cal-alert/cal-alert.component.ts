@@ -5,6 +5,7 @@ import 'rxjs/add/operator/switchMap';
 import {FlightService} from '../../shared/flights/flight.service';
 import {isBoolean} from 'util';
 import {DatePipe} from '@angular/common';
+import {Flight} from '../../shared/flights/flight.model';
 
 @Component({
   selector: 'app-cal-alert',
@@ -13,12 +14,13 @@ import {DatePipe} from '@angular/common';
 })
 export class CalAlertComponent implements OnInit {
 
-  protected _dateString: string;
-  protected recDate: Date;
+  _dateString: string;
+  flights: Flight[];
 
   constructor(private dateServ: DateStringService,
               private route: ActivatedRoute,
-              private datePipe: DatePipe) {
+              private datePipe: DatePipe,
+              private flightServ: FlightService) {
   }
 
   ngOnInit() {
@@ -34,9 +36,19 @@ export class CalAlertComponent implements OnInit {
         this._dateString = params.date;
       });
     }
+    this.dateHasFlights(this._dateString);
   }
 
-  dateHasFlights() {
-    return false;
+  dateHasFlights(date: string) {
+    this.flightServ.getByDate(date).subscribe(
+      flights => {
+        if (flights.length === 0) {
+          return false;
+        }
+        else {
+          this.flights = flights;
+          return true;
+        }
+      });
   }
 }
