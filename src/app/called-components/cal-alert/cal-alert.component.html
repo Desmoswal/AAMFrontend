@@ -1,0 +1,8 @@
+<div class="container">
+  <div *ngIf="dateHasFlights()">
+    <app-flight></app-flight>
+  </div>
+  <div *ngIf="!dateHasFlights()">
+    <app-no-flight-alert [receivedDate] = "_dateString"></app-no-flight-alert>
+  </div>
+</div>

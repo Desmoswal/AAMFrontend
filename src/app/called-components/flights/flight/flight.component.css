@@ -1,0 +1,10 @@
+/deep/ ngb-accordion > div.card {
+  border-radius: 0;
+  padding: 0;
+}
+
+.heading{
+  color: darkorange;
+  font-weight: bold;
+  margin-bottom: .5em;
+}
