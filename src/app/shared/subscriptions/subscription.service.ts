@@ -14,4 +14,8 @@ export class SubscriptionService {
   getByUserId(id: number): Observable<Subscription[]> {
     return this.http.get<Subscription[]>(url + '/' + id);
   }
+
+  createSubscription(userId: number, date: string): Observable<Subscription> {
+    return this.http.post<Subscription>(userId.toString(), date);
+  }
 }

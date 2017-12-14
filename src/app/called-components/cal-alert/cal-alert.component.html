@@ -1,3 +1,11 @@
-<h3>
-  {{recievedDate}}
-</h3>
+<div class="container">
+  {{_dateString}}
+  <br>
+  {{recDate | date: 'yyyy/MM/dd'}}
+  <div *ngIf="dateHasFlights()">
+    <app-flight></app-flight>
+  </div>
+  <div *ngIf="!dateHasFlights()">
+    <app-no-flight-alert [receivedDate] = "_dateString"></app-no-flight-alert>
+  </div>
+</div>

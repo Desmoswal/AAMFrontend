@@ -1,0 +1,12 @@
+.card{
+  margin-top: 50%;
+  transform: translate(0%,50%);
+}
+.card-text {
+  margin: .5em;
+}
+.btn {
+  margin-left: 1em;
+
+}
+

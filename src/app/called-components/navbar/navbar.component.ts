@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {DateStringService} from '../../shared/date-string-service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  date: string;
+
+  constructor(private dateStringServ: DateStringService) {
+  }
 
   ngOnInit() {
+    this.date = this.dateStringServ.dateToString(new Date());
   }
 
 }
