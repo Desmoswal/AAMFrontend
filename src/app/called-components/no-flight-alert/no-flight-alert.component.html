@@ -1,11 +1,10 @@
 <div class="card">
-  <h4 class="card-header text-center">No flights on this day</h4>
+  <h4 class="card-header text-center">No flights on the {{receivedDate}}</h4>
   <div class="card-block">
     <p class="card-text">Would you like to subscribe to this date so that you will be notified when a new flight becomes
       available?</p>
-    <div class="card-footer text-muted text-center">
-        <button class="btn btn-primary float-left">Subscribe</button>
-        <button class="btn btn-secondary flight-right">Cancel</button>
+    <div class="card-footer text-muted text-right">
+        <button class="btn btn-primary" (click)="createSub()">Subscribe</button>
     </div>
   </div>
 </div>

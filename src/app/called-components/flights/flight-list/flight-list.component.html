@@ -1,0 +1,10 @@
+<div class="container">
+  <div *ngIf="loading" class="row">
+    <div id="loadingIMG"></div>
+    <p>Fetching information</p>
+  </div>
+  <div *ngFor="let flighthtml of flights" class="list-group-item list-group-item-action">
+    <app-flight [flight]="flighthtml"></app-flight>
+  </div>
+</div>
+

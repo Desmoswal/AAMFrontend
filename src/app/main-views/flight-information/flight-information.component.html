@@ -3,11 +3,18 @@
     <app-navbar></app-navbar>
   </div>
   <body>
-  <div class="col-md-2">
-    <p>Search goes here</p>
+  <div class="row" style="padding: 5px;">
+    <div class="col-md-12">
+      <input type="search" value="" class="form-control" placeholder="Search...">
+    </div>
   </div>
-  <div class="col-md-10">
-    <app-flight></app-flight>
-  </div>
+    <div class="row">
+      <div class="col-md-12">
+        <app-flight-list></app-flight-list>
+      </div>
+    </div>
   </body>
 </div>
+
+
+

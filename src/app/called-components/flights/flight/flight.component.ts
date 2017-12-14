@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Flight} from '../../shared/flights/flight.model';
+import {Flight} from '../../../shared/flights/flight.model';
 import {DatePipe} from '@angular/common';
 
 @Component({
