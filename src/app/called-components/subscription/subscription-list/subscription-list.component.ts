@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Flight} from '../../../shared/flights/flight.model';
 import {Subscription} from '../../../shared/subscriptions/subscription.model';
+import {User} from '../../../shared/users/user.model';
 
 @Component({
   selector: 'app-subscription-list',
@@ -10,6 +11,8 @@ import {Subscription} from '../../../shared/subscriptions/subscription.model';
 export class SubscriptionListComponent implements OnInit {
   flights: Subscription[];
   loading = true;
+
+  @Input() user: User;
   constructor() { }
 
   ngOnInit() {

@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {User} from '../../shared/users/user.model';
 
 @Component({
   selector: 'app-aviation-home',
@@ -6,21 +7,15 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  today: Date;
-  userType: number;
+  user: User = new User();
 
   constructor() {
-    this.checkUserType();
-    this.today = new Date();
+    this.user.id = 1;
+    this.user.type = 1;
   }
 
   ngOnInit() {
   }
 
-  checkUserType() {
-    //returns 1 if it's a planner
-    this.userType = 1;
-    //returns 2 if it's a normal user
-  }
 
 }
