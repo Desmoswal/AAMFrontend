@@ -24,8 +24,8 @@ export class FlightListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getFlights();
-  }
+    // this.getFlights();
+  }/*
 
   getFlights() {
     this.loading = true;
@@ -65,5 +65,5 @@ export class FlightListComponent implements OnInit {
       this.flights = this.inputFlights;
     }
 
-  }
+  }*/
 }
