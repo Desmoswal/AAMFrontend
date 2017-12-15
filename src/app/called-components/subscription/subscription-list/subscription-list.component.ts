@@ -1,7 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Flight} from '../../../shared/flights/flight.model';
 import {Subscription} from '../../../shared/subscriptions/subscription.model';
+
 import {User} from '../../../shared/users/user.model';
+
+import {SubscriptionService} from '../../../shared/subscriptions/subscription.service';
 
 @Component({
   selector: 'app-subscription-list',
@@ -9,13 +12,29 @@ import {User} from '../../../shared/users/user.model';
   styleUrls: ['./subscription-list.component.css']
 })
 export class SubscriptionListComponent implements OnInit {
-  flights: Subscription[];
+  subscriptions: Subscription[];
   loading = true;
 
   @Input() user: User;
-  constructor() { }
+
+  noSupscriptions = false;
+
+  constructor(private subServ: SubscriptionService) {
+  }
+
 
   ngOnInit() {
+  }
+
+  getSubscriptions() {
+    this.subServ.getByUserId(this.user.id).subscribe(subscriptions => {
+        this.loading = false;
+        this.subscriptions = subscriptions;
+        if (subscriptions.length === 0) {
+        }
+        this.noSupscriptions = true;
+      }
+    );
   }
 
 }

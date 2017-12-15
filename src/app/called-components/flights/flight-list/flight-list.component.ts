@@ -34,13 +34,14 @@ export class FlightListComponent implements OnInit {
     this.getFlights();
   }
 
+
   getFlights() {
     this.loading = true;
 
     //if it's a planner they can get all the flights or flight by date
     if (this.user.type === 1) {
 
-    
+
       //get by today's date
       if (this._getterType) {
 
@@ -64,6 +65,7 @@ export class FlightListComponent implements OnInit {
 
     }
 
+
     //if it's a normal user they can only get their flights
     if (this.user.type === 2) {
       this.flightServ.getByUserId(this.user.id).subscribe(flight => {
@@ -77,43 +79,45 @@ export class FlightListComponent implements OnInit {
     }
   }
 
-// getFlights() {
-//    this.loading = true;
-//
-//   //getType of 1 means to get by date
-//   if (this.getType === 1) {
-//     this.flightServ.getByDate(this.datePipe.transform(this.inputDate, 'yyyyMMdd')).subscribe(
-//       flight => {
-//         this.loading = false;
-//         this.flights = flight;
-//         if (flight.length === 0) {
-//           this.noFlights = true;
-//         }
-//       }
-//     );
-//   }
-//
-//   //get by userId
-//   if (this.getType === 2) {
-//
-//   }
-//   //get all flights
-//   if (this.getType === 3) {
-//     this.flightServ.getAll().subscribe(
-//       flight => {
-//         this.loading = false;
-//         this.flights = flight;
-//         if (flight.length === 0) {
-//           this.noFlights = true;
-//         }
-//       }
-//     );
-//   }
-//
-//   //when the list of flights are already provided
-//   else {
-//     this.flights = this.inputFlights;
-//   }
-//
-// }
+  // getFlights() {
+  //    this.loading = true;
+  //
+  //   //getType of 1 means to get by date
+  //   if (this.getType === 1) {
+  //     this.flightServ.getByDate(this.datePipe.transform(this.inputDate, 'yyyyMMdd')).subscribe(
+  //       flight => {
+  //         this.loading = false;
+  //         this.flights = flight;
+  //         if (flight.length === 0) {
+  //           this.noFlights = true;
+  //         }
+  //       }
+  //     );
+  //   }
+  //
+  //   //get by userId
+  //   if (this.getType === 2) {
+  //
+  //   }
+  //   //get all flights
+  //   if (this.getType === 3) {
+  //     this.flightServ.getAll().subscribe(
+  //       flight => {
+  //         this.loading = false;
+  //         this.flights = flight;
+  //         if (flight.length === 0) {
+  //           this.noFlights = true;
+  //         }
+  //       }
+  //     );
+  //   }
+  //
+  //   //when the list of flights are already provided
+  //   else {
+  //     this.flights = this.inputFlights;
+  //   }
+  //
+  // }
+
+
 }
