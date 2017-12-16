@@ -7,14 +7,22 @@ import {User} from '../../shared/users/user.model';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  user: User = new User();
+  user: User;
 
   constructor() {
-    this.user.id = 1;
-    this.user.type = 1;
+
   }
 
   ngOnInit() {
+    this.getUser();
+  }
+
+  //TODO
+  //will need to change this when we have authenticaiton
+  getUser() {
+    this.user = new User();
+    this.user.id = 1;
+    this.user.type = 1;
   }
 
 

@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {SubscriptionService} from '../../shared/subscriptions/subscription.service';
+import {User} from '../../shared/users/user.model';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-no-flight-alert',
@@ -8,18 +10,22 @@ import {SubscriptionService} from '../../shared/subscriptions/subscription.servi
 })
 export class NoFlightAlertComponent implements OnInit {
 
-  constructor(private subServ: SubscriptionService) {
+  _recievedDate: string;
+  @Input() user: User;
+
+  @Input() set receivedDate(date: string) {
+    this._recievedDate = date.slice(0, 4) + '-' + date.slice(4, 6) + '-' + date.slice(6);
   }
 
-  @Input() receivedDate: string;
-  @Input() userId = 1;
+  constructor(private subServ: SubscriptionService) {
+
+  }
 
   ngOnInit() {
   }
 
   createSub() {
-    //this.subServ.createSubscription(this.user, this.recievedDate);
-    console.log(this.userId, this.receivedDate);
+    this.subServ.createSubscription(this.user.id, this.receivedDate);
   }
 
 }

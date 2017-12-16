@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Flight} from '../../../shared/flights/flight.model';
 import {DatePipe} from '@angular/common';
 import {Leg} from '../../../shared/legs/leg.model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-flight',
@@ -11,12 +12,16 @@ import {Leg} from '../../../shared/legs/leg.model';
 
 export class FlightComponent implements OnInit {
 
+  _bookingButton: boolean;
   @Input() flight: Flight;
+  @Input() set bookingButton (button: boolean){
+    this._bookingButton = button;
+  }
   legs: Leg[];
 
   departureTime: Date;
 
-  constructor() {
+  constructor(private router: Router) {
 
   }
 
@@ -29,6 +34,10 @@ export class FlightComponent implements OnInit {
       this.legs = this.flight.legs;
       this.departureTime = new Date(this.legs[0].toff);
     }
+  }
+  createReservation() {
+    this.router
+      .navigateByUrl('/customers');
   }
 }
 
