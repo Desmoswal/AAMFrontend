@@ -42,8 +42,7 @@ export class CalAlertComponent implements OnInit {
     this.getUser();
   }
 
-  //TODO
-  //need to change this method when we have authenication, so we get the user from the backend
+  //TODO need to change this method when we have authenication, so we get the user from the backend
   getUser() {
     this.user = new User();
     this.user.id = 1;

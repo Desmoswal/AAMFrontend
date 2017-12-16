@@ -4,7 +4,7 @@
     <p>Fetching information</p>
   </div>
   <div *ngFor="let flighthtml of _flights" class="list-group-item list-group-item-action">
-    <app-flight [flight]="flighthtml" [bookingButton] = "_bookingButton"></app-flight>
+    <app-flight [flight]="flighthtml" [bookingButton]="_bookingButton" [user]="user"></app-flight>
   </div>
   <div *ngIf="noFlights">
     <p>No flights scheduled</p>
