@@ -1,50 +1,40 @@
-<body class="flight-border">
-<div><h4>Flight No: {{flight.flightNo}}</h4>
-  <div class="wrapper">
-    <div class="tab">
-      <input id="tab-one" type="checkbox" name="tabs">
-      <label for="tab-one">Details <i class="expandable positive fa fa-plus-circle fa-2x "
-                                      aria-hidden="true"></i></label>
-      <div class="tab-content">
-        Flight Legs
-      </div>
-    </div>
-  </div>
-</div>
-</body>
-
-<ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
-  <ngb-panel title="Simple">
-    <ng-template ngbPanelContent>
-      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia
-      aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
-      sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica,
-      craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings
-      occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus
-      labore sustainable VHS.
-    </ng-template>
-  </ngb-panel>
+<ngb-accordion #acc="ngbAccordion">
   <ngb-panel>
     <ng-template ngbPanelTitle>
-      <span>&#9733; <b>Fancy</b> title &#9733;</span>
+      <div class="row">
+        <div class="col"><b>{{flight.flightNo}}</b></div>
+        <div class="col"><b>Seats Available: </b> {{flight.seatsAvailable}}</div>
+        <div class="col" style="text-align: right"><b>Dept: </b> {{_departureTime | date: "MMM d, y h:mm a"}}</div>
+        <div *ngIf="_bookingButton" class="col">
+          <button class="btn btn-primary" (click)="createReservation()">Book</button>
+        </div>
+      </div>
     </ng-template>
     <ng-template ngbPanelContent>
-      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia
-      aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
-      sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica,
-      craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings
-      occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus
-      labore sustainable VHS.
-    </ng-template>
-  </ngb-panel>
-  <ngb-panel title="Disabled" [disabled]="true">
-    <ng-template ngbPanelContent>
-      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia
-      aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
-      sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica,
-      craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings
-      occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus
-      labore sustainable VHS.
+      <div class="row text-center" style="padding-left: 1.5em; padding-right: 2.5em;">
+        <div class="col heading">
+          Dept Location
+        </div>
+        <div class="col heading">
+          Arr Location
+        </div>
+        <div class="col heading">
+          Standard Time of Arrival
+        </div>
+        <div class="col heading">
+          Standard Time of Departure
+        </div>
+        <div class="col heading">
+          Take Off
+        </div>
+        <div class="col heading">
+          Touch Down
+        </div>
+        <div class="col heading">
+          Delay
+        </div>
+      </div>
+      <app-leg-list [legs]="legs"></app-leg-list>
     </ng-template>
   </ngb-panel>
 </ngb-accordion>

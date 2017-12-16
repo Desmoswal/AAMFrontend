@@ -1,15 +1,16 @@
 import {Flight} from '../flights/flight.model';
-import {DatePipe} from '@angular/common';
 
 export class Leg {
+
   id: number;
   legNo: number;
   deptLocation: string;
   arrLocation: string;
-  STD: Date;
-  STA: Date;
-  Toff: Date;
-  Tdown: Date;
+  std: string;
+  sta: string;
+  toff: string;
+  tdown: string;
   flight: Flight;
-  Delay: DatePipe;
+  delay: string;
+
 }

@@ -1,34 +1,36 @@
-
-import { SubscriptionComponent } from './called-components/subscription/subscription/subscription.component';
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-
-import { AppComponent } from './app.component';
-import { LoginComponent } from './main-views/login/login.component';
-import { HomeComponent } from './main-views/home/home.component';
-import { CalendarComponent } from './called-components/calendar/calendar.component';
-import { CalendarModule } from 'angular-calendar';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { routing } from './app.routing';
-
-import { NavbarComponent } from './called-components/navbar/navbar.component';
-import { FlightComponent } from './called-components/flights/flight/flight.component';
-import { MapComponent } from './called-components/map/map.component';
-import { SubscriptionListComponent } from './called-components/subscription/subscription-list/subscription-list.component';
+import {SubscriptionComponent} from './called-components/subscription/subscription/subscription.component';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {AppComponent} from './app.component';
+import {LoginComponent} from './main-views/login/login.component';
+import {HomeComponent} from './main-views/home/home.component';
+import {CalendarComponent} from './called-components/calendar/calendar.component';
+import {CalendarModule} from 'angular-calendar';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {routing} from './app.routing';
+import {NavbarComponent} from './called-components/navbar/navbar.component';
+import {FlightComponent} from './called-components/flights/flight/flight.component';
+import {MapComponent} from './called-components/map/map.component';
+import {SubscriptionListComponent} from './called-components/subscription/subscription-list/subscription-list.component';
 import {FormsModule} from '@angular/forms';
-import { ReserveFlightComponent } from './main-views/reserve-flight/reserve-flight.component';
-import { FlightInformationComponent } from './main-views/flight-information/flight-information.component';
-import { AngularFontAwesomeModule } from 'angular-font-awesome';
-import { LegComponent } from './called-components/leg/leg.component';
+import {ReserveFlightComponent} from './main-views/reserve-flight/reserve-flight.component';
+import {FlightInformationComponent} from './main-views/flight-information/flight-information.component';
+import {AngularFontAwesomeModule} from 'angular-font-awesome';
+import {LegComponent} from './called-components/legs/leg/leg.component';
 import {CommonModule, DatePipe} from '@angular/common';
-import { FlightListComponent } from './called-components/flights/flight-list/flight-list.component';
+import {FlightListComponent} from './called-components/flights/flight-list/flight-list.component';
 import {HttpClientModule} from '@angular/common/http';
-import { CalAlertComponent } from './called-components/cal-alert/cal-alert.component';
+import {CalAlertComponent} from './called-components/cal-alert/cal-alert.component';
 import {DateStringService} from './shared/date-string-service';
 import {FlightService} from './shared/flights/flight.service';
-import { NoFlightAlertComponent } from './called-components/no-flight-alert/no-flight-alert.component';
+import {NoFlightAlertComponent} from './called-components/no-flight-alert/no-flight-alert.component';
 import {SubscriptionService} from './shared/subscriptions/subscription.service';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {ReserveFormDetailComponent} from './main-views/reserve-form-detail/reserve-form-detail.component';
+import {EmailService} from './shared/email/email.service';
+import {LegListComponent} from './called-components/legs/leg-list/leg-list.component';
+import {AgmCoreModule} from '@agm/core';
+
 
 @NgModule({
   declarations: [
@@ -46,7 +48,9 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     LegComponent,
     FlightListComponent,
     CalAlertComponent,
-    NoFlightAlertComponent
+    NoFlightAlertComponent,
+    LegListComponent,
+    ReserveFormDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -57,10 +61,14 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     CommonModule,
     HttpClientModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBdpXUElCLoC1Nf397cIzvM64Ho9YdXxxk'
+    })
   ],
-  providers: [DateStringService, FlightService, SubscriptionService, DatePipe],
+  providers: [DateStringService, FlightService, SubscriptionService, DatePipe, EmailService],
 
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

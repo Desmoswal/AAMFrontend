@@ -3,7 +3,7 @@ import {User} from '../users/user.model';
 
 export class Subscription {
   userId: number;
-  date: Date;
+  date: string;
   user: User;
   flights: Flight[];
 }
