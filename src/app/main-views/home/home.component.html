@@ -3,13 +3,17 @@
     <app-navbar></app-navbar>
   </div>
   <div class="viewbody">
-    <div>
+    <div *ngIf="user.type===1">
       <h1>Today's Scheduled flights</h1>
-      <app-flight-list [getType]="userType" [inputDate] = "today"></app-flight-list>
+      <app-flight-list [user]="user"  ></app-flight-list>
     </div>
-    <div>
+    <div *ngIf="user.type===2">
+      <h1>My flights</h1>
+      <app-flight-list [user]="user"></app-flight-list>
+    </div>
+    <div *ngIf="user.type===1">
       <h1>Flight Watch</h1>
-      <app-subscription-list></app-subscription-list>
+      <app-subscription-list [user]="user"></app-subscription-list>
     </div>
   </div>
 </div>

@@ -1,4 +1,11 @@
 import {Component, OnInit} from '@angular/core';
+import {User} from '../../shared/users/user.model';
+import {LoginService} from '../../shared/login/shared/login.service';
+import {TokenService} from '../../shared/login/shared/token.service';
+import {JwtHelper} from 'angular2-jwt';
+import {AuthGuard} from '../../shared/login/auth/auth.guard';
+import {UserService} from '../../shared/users/user.service';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'app-aviation-home',
@@ -6,21 +13,14 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  today: Date;
-  userType: number;
+  user: User;
 
-  constructor() {
-    this.checkUserType();
-    this.today = new Date();
+  constructor(private loginServ: LoginService, private userServ: UserService, private tokenServ: TokenService) {
+    this.user = this.loginServ.currentUser;
   }
 
   ngOnInit() {
   }
 
-  checkUserType() {
-    //returns 1 if it's a planner
-    this.userType = 1;
-    //returns 2 if it's a normal user
-  }
 
 }

@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+import {FormControl, FormGroup} from '@angular/forms';
+import {LoginService} from '../../shared/login/shared/login.service';
 
 @Component({
   selector: 'app-login',
@@ -8,28 +10,26 @@ import {Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  model: any = {};
-  loading = false;
-  errormessage = '';
-
-  constructor(private router: Router) {
+  loginGroup: FormGroup;
+  constructor(private loginServ: LoginService,
+              private router: Router) {
+    this.loginGroup = new FormGroup({
+      username: new FormControl(),
+      password: new FormControl()
+    });
   }
 
   ngOnInit() {
-    // reset login status
-    //this.authenticationService.logout();
   }
 
   login() {
-    this.loading = true;
-    // this.authenticationService.login(this.model.username, this.model.password)
-    //   .subscribe(
-    //     success => {
-    //       this.router.navigate(['/home']);
-    //     },
-    //     error => {
-    //       this.errormessage = 'Wrong username or password!';
-    //       this.loading = false;
-    //     });
+    this.loginServ.login(this.loginGroup.value).subscribe(token => {
+      if (token) {
+        this.router
+          .navigateByUrl('/home');
+      } else {
+
+      }
+    });
   }
 }

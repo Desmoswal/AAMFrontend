@@ -5,7 +5,7 @@ import {Observable} from 'rxjs/Observable';
 import {environment} from '../../../environments/environment';
 import {User} from './user.model';
 
-const url = environment.apiEndpoint + 'users';
+const url = environment.apiEndpoint + '/user';
 @Injectable()
 export class UserService {
 

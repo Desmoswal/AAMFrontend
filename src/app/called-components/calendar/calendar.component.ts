@@ -5,9 +5,7 @@ import {
 import {
   CalendarEvent,
 } from 'angular-calendar';
-import {ActivatedRoute, Router} from '@angular/router';
 import 'rxjs/add/operator/switchMap';
-import {DateStringService} from '../../shared/date-string-service';
 
 
 @Component({
@@ -22,8 +20,7 @@ export class CalendarComponent implements OnInit {
   viewDate: Date = new Date();
   @Output() dateEvent = new EventEmitter<Date>();
 
-  constructor(private route: ActivatedRoute,
-              private router: Router) {
+  constructor() {
   }
 
   ngOnInit() {

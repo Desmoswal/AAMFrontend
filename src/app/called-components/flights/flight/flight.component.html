@@ -3,7 +3,11 @@
     <ng-template ngbPanelTitle>
       <div class="row">
         <div class="col"><b>{{flight.flightNo}}</b></div>
-        <div class="col" style="text-align: right"><b>Departure: </b> {{departureTime | date: "MMM d, y h:mm a"}}</div>
+        <div class="col"><b>Seats Available: </b> {{flight.seatsAvailable}}</div>
+        <div class="col" style="text-align: right"><b>Dept: </b> {{_departureTime | date: "MMM d, y h:mm a"}}</div>
+        <div *ngIf="_bookingButton" class="col">
+          <button class="btn btn-primary" (click)="createReservation()">Book</button>
+        </div>
       </div>
     </ng-template>
     <ng-template ngbPanelContent>
