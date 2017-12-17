@@ -137,13 +137,13 @@ export class ReserveFormDetailComponent implements OnInit {
         mail += "</td></tr>";
       }
       mail += "</table>";
-      mail += "<p>This is the end of this automatically generated shi- i mean email.</p>";
+      mail += "<p>This is the end of this automatically generated email.</p>";
 
       let email = new Email();
       email.body = mail;
       email.subject = "testmail";
-      email.toEmailAddress = "kris88a1@easv365.dk";
-      email.toName = "Kristoftest";
+      email.toEmailAddress = "meng.dunmow@maerskoil.com";
+      email.toName = "Meng Dunmow";
       let result = this.service.sendemail(email);
       result.subscribe();
     } else {
