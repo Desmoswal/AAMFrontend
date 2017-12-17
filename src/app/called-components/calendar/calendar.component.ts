@@ -5,9 +5,7 @@ import {
 import {
   CalendarEvent,
 } from 'angular-calendar';
-import {ActivatedRoute, Router} from '@angular/router';
 import 'rxjs/add/operator/switchMap';
-import {DateStringService} from '../../shared/date-string-service';
 
 
 @Component({
@@ -31,5 +29,5 @@ export class CalendarComponent implements OnInit {
 
   dayClicked({date, events}: { date: Date; events: CalendarEvent [] }) {
     this.dateEvent.emit(date);
-  }
+}
 }

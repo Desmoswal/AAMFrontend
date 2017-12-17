@@ -1,12 +1,12 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
-import {EmailService} from "../../shared/email/email.service";
-import {Email} from "../../shared/email/email.model";
-import {DatePipe} from '@angular/common';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {selector} from "rxjs/operator/publish";
-import {DateFormatter} from "@angular/common/src/pipes/intl";
-import {validate} from "codelyzer/walkerFactory/walkerFn";
+import {ActivatedRoute, Router} from '@angular/router';
+import {EmailService} from '../../shared/email/email.service';
+import {Email} from '../../shared/email/email.model';
+import 'rxjs/add/operator/switchMap';
+import {UserService} from '../../shared/users/user.service';
+import {FlightService} from '../../shared/flights/flight.service';
+import {User} from '../../shared/users/user.model';
+import {Flight} from '../../shared/flights/flight.model';
 
 @Component({
   selector: 'app-reserve-form-detail',
@@ -14,20 +14,31 @@ import {validate} from "codelyzer/walkerFactory/walkerFn";
   styleUrls: ['./reserve-form-detail.component.css']
 })
 export class ReserveFormDetailComponent implements OnInit {
-
-  @Input() reserveDate;
-  @Input() reserveFlight;
-
   model: any = new Array();
-  date: string;
+  _bookingDate: string;
+  _bookingRequesterID: number;
+  _bookingFlightID: number;
+  _user: User;
+  _flight: Flight;
 
-  constructor(private router:Router, private service: EmailService, private datePipe: DatePipe) {
+  constructor(private router: Router,
+              private service: EmailService,
+              private route: ActivatedRoute,
+              private userSer: UserService,
+              private flightSer: FlightService) {
   }
-
 
   ngOnInit() {
-    this.date = this.datePipe.transform(new Date(), 'yyyyMMdd');
+    this.route.queryParams.subscribe(params => {
+      //formated the date as yyyy-MM-dd
+      this._bookingDate = params.d.splice(0, 4) + '-' + params.d.slice(4, 6) + '-' + params.d.slice(6);
+      this._bookingFlightID = params.f;
+      this._bookingRequesterID = params.i;
+    });
+    this.flightSer.getByFlightId(this._bookingFlightID).subscribe(flight => this._flight = flight);
+    this.userSer.getById(this._bookingRequesterID).subscribe(user => this._user = user);
   }
+
 
   validate(formcontent: Map<any, any>, keys: Array<any>): boolean {
     let allValid:boolean = false;
@@ -54,8 +65,8 @@ export class ReserveFormDetailComponent implements OnInit {
 
   send() {
 
-  var content = new Map();
-  var assignedtitles = new Map();
+  let content = new Map();
+  let assignedtitles = new Map();
   let titles = [
     'Asset',
     'Department',
@@ -76,7 +87,7 @@ export class ReserveFormDetailComponent implements OnInit {
     'Offshore contact',
     'Prod. Assist.'
   ];
-  var keys = [
+  let keys = [
     'asset',
     'department',
     'jobcat',
@@ -100,7 +111,7 @@ export class ReserveFormDetailComponent implements OnInit {
       assignedtitles.set(keys[i],titles[i]);
     }
 
-    for(let i=0;i<keys.length;i++) {
+    for (let i = 0; i < keys.length; i++) {
       content.set(keys[i], this.model[keys[i]]);
     }
     if(this.validate(content, keys)) {
@@ -108,6 +119,10 @@ export class ReserveFormDetailComponent implements OnInit {
 
       mail += "<p>Automated test email for a booker. This email contains the flight reserve form's data.</p>";
       mail += "<table>";
+      mail += "<tr><td>Flight: </td><td>"+this._flight.flightNo +"</td></tr>";
+      mail += "<tr><td>Requester: </td><td>"+this._user.username+"</td></tr>";
+      mail += "<tr><td>Flight Date: </td><td>"+this._bookingDate+"</td></tr>";
+
       for (let i = 0; i < keys.length; i++) {
         mail += "<tr><td>";
         mail += assignedtitles.get(keys[i]) + ':';

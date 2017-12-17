@@ -3,8 +3,8 @@
     <div id="loadingIMG"></div>
     <p>Fetching information</p>
   </div>
-  <div *ngFor="let flighthtml of flights" class="list-group-item list-group-item-action">
-    <app-flight [flight]="flighthtml"></app-flight>
+  <div *ngFor="let flighthtml of _flights" class="list-group-item list-group-item-action">
+    <app-flight [flight]="flighthtml" [bookingButton]="_bookingButton" [user]="user"></app-flight>
   </div>
   <div *ngIf="noFlights">
     <p>No flights scheduled</p>
