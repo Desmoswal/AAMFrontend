@@ -1,5 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {DateStringService} from '../../shared/date-string-service';
 import {ActivatedRoute} from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 import {FlightService} from '../../shared/flights/flight.service';
@@ -32,8 +31,7 @@ export class CalAlertComponent implements OnInit {
     }
   }
 
-  constructor(private dateServ: DateStringService,
-              private route: ActivatedRoute,
+  constructor(private route: ActivatedRoute,
               private datePipe: DatePipe,
               private flightServ: FlightService) {
   }

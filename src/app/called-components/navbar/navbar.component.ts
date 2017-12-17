@@ -1,5 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {DateStringService} from '../../shared/date-string-service';
+import {Component, OnInit} from '@angular/core';
 import {DatePipe} from '@angular/common';
 
 @Component({
