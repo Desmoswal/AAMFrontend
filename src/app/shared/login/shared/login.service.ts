@@ -13,11 +13,9 @@ const url = environment.apiEndpoint + '/login';
 @Injectable()
 export class LoginService {
 
-  //public currentUser: User;
 
   constructor(private http: HttpClient,
-              private tokenService: TokenService,
-              private router: Router) {
+              private tokenService: TokenService) {
 
   }
 
@@ -29,8 +27,10 @@ export class LoginService {
       }
     ).switchMap(payload => Observable.create(obs => {
       const obj: Payload = payload;
-      this.tokenService.setToken(obj.token);
-      obs.next(payload);
+      if (obj.token) {
+        this.tokenService.setToken(obj.token);
+        obs.next(obj.token);
+      }
     }));
   }
 

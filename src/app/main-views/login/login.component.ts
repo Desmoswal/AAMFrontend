@@ -23,11 +23,13 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loginServ.logout().subscribe();
   }
 
   login() {
     this.loading = true;
     this.loginServ.login(this.loginGroup.value).subscribe(token => {
+      console.log(token);
       if (token) {
         this.router
           .navigateByUrl('/home');
