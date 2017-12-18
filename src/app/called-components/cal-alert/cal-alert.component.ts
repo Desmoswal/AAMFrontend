@@ -1,11 +1,12 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 import {FlightService} from '../../shared/flights/flight.service';
 import {isBoolean} from 'util';
 import {DatePipe} from '@angular/common';
 import {Flight} from '../../shared/flights/flight.model';
 import {User} from '../../shared/users/user.model';
+import {TokenService} from '../../shared/login/shared/token.service';
 
 @Component({
   selector: 'app-cal-alert',
@@ -33,18 +34,24 @@ export class CalAlertComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private datePipe: DatePipe,
-              private flightServ: FlightService) {
+              private flightServ: FlightService, private tokServ: TokenService, private router: Router) {
   }
 
   ngOnInit() {
-    this.getUser();
+    this.checkUser();
   }
 
-  //TODO need to change this method when we have authenication, so we get the user from the backend
-  getUser() {
-    this.user = new User();
-    this.user.id = 1;
-    this.user.type = 1;
+  checkUser() {
+    if (typeof this.user === 'undefined') {
+      if (localStorage.getItem('token')) {
+        this.tokServ.getUserFromToken().subscribe(outputUser => {
+          this.user = outputUser;
+        });
+      }
+      else {
+        this.router.navigateByUrl('/login');
+      }
+    }
   }
 
   setDate() {
