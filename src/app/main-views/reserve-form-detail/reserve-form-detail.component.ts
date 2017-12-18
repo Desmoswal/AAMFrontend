@@ -7,6 +7,7 @@ import {UserService} from '../../shared/users/user.service';
 import {FlightService} from '../../shared/flights/flight.service';
 import {User} from '../../shared/users/user.model';
 import {Flight} from '../../shared/flights/flight.model';
+import {TokenService} from '../../shared/login/shared/token.service';
 
 @Component({
   selector: 'app-reserve-form-detail',
@@ -25,7 +26,8 @@ export class ReserveFormDetailComponent implements OnInit {
               private service: EmailService,
               private route: ActivatedRoute,
               private userSer: UserService,
-              private flightSer: FlightService) {
+              private flightSer: FlightService,
+              private  tokServ: TokenService) {
   }
 
   ngOnInit() {
@@ -36,9 +38,21 @@ export class ReserveFormDetailComponent implements OnInit {
       this._bookingRequesterID = params.i;
     });
     this.flightSer.getByFlightId(this._bookingFlightID).subscribe(flight => this._flight = flight);
-    this.userSer.getById(this._bookingRequesterID).subscribe(user => this._user = user);
+    this.checkUser();
   }
 
+  checkUser() {
+    if (typeof this._user === 'undefined') {
+      if (localStorage.getItem('token')) {
+        this.tokServ.getUserFromToken().subscribe(outputUser => {
+          this._user = outputUser;
+        });
+      }
+      else {
+        this.router.navigateByUrl('/login');
+      }
+    }
+  }
 
   send() {
     const content = new Map();

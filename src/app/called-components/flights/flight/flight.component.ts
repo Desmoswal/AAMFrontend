@@ -26,7 +26,7 @@ export class FlightComponent implements OnInit {
   _departureTime: Date;
   _departureDate: string;
 
-  constructor(private router: Router, private datePipe: DatePipe) {
+  constructor(private router: Router) {
 
   }
 

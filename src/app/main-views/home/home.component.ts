@@ -30,18 +30,9 @@ export class HomeComponent implements OnInit {
   checkUser() {
     if (typeof this.user === 'undefined') {
       if (localStorage.getItem('token')) {
-        console.log('no user, but one stored on local storage');
-        // Observable.create(obs => {
-        //   this.tokServ.getUserFromToken().subscribe(outputUser => {
-        //     this.user = outputUser;
-        //     obs.next(outputUser);
-        //   });
-        // });
-
         this.tokServ.getUserFromToken().subscribe(outputUser => {
           this.user = outputUser;
         });
-
       }
       else {
         this.router.navigateByUrl('/login');

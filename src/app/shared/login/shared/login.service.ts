@@ -6,6 +6,7 @@ import {Observable} from 'rxjs/Observable';
 import {environment} from '../../../../environments/environment';
 import {Payload} from './payload.model';
 import {UserService} from '../../users/user.service';
+import {Router} from '@angular/router';
 
 const url = environment.apiEndpoint + '/login';
 
@@ -16,7 +17,7 @@ export class LoginService {
 
   constructor(private http: HttpClient,
               private tokenService: TokenService,
-              private userSer: UserService) {
+              private router: Router) {
 
   }
 
@@ -29,7 +30,6 @@ export class LoginService {
     ).switchMap(payload => Observable.create(obs => {
       const obj: Payload = payload;
       this.tokenService.setToken(obj.token);
-      //localStorage.setItem('Id', obj.userID.toString());
       obs.next(payload);
     }));
   }
@@ -37,7 +37,6 @@ export class LoginService {
   public logout(): Observable<boolean> {
     return Observable.create(obs => {
       this.tokenService.clearToken();
-      localStorage.removeItem('Id');
       obs.next(!this.tokenService.getToken());
     });
   }
