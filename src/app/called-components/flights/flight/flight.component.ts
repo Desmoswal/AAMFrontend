@@ -46,7 +46,8 @@ export class FlightComponent implements OnInit {
 
   createReservation() {
 
-    this.router.navigate(['/resdet'], {queryParams: {d: this._departureDate, f: this.flight.id}});
+    //this.router.navigate(['/resdet'], {queryParams: {d: this._departureDate, f: this.flight.id}});
+    this.router.navigateByUrl('resdet?d=20171218&f=1');
     console.log(this._departureDate, this.flight.id);
   }
 }

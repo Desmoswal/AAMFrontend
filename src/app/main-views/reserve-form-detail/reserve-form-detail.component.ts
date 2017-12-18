@@ -47,9 +47,7 @@ export class ReserveFormDetailComponent implements OnInit {
           this._user = outputUser;
         });
       }
-      else {
-        this.router.navigateByUrl('/login');
-      }
+
     }
   }
 

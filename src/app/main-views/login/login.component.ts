@@ -23,7 +23,6 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loginServ.logout().subscribe();
   }
 
   login() {
