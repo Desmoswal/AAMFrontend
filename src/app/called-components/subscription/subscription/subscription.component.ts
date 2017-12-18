@@ -1,7 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Subscription} from '../../../shared/subscriptions/subscription.model';
 import {DatePipe} from '@angular/common';
 import {SubscriptionService} from '../../../shared/subscriptions/subscription.service';
+import {Router, RouterModule} from '@angular/router';
 
 @Component({
   selector: 'app-subscription',
@@ -10,12 +11,12 @@ import {SubscriptionService} from '../../../shared/subscriptions/subscription.se
 })
 export class SubscriptionComponent implements OnInit {
   @Input() subscription: Subscription;
+  @Output() DeleteEvent = new EventEmitter();
   _departureDate: string;
   _departureTime: Date;
   _stringForFlights;
-  deleted = false;
 
-  constructor(private subServ: SubscriptionService) {
+  constructor(private subServ: SubscriptionService, private router: Router) {
   }
 
   ngOnInit() {
@@ -33,10 +34,9 @@ export class SubscriptionComponent implements OnInit {
 
   deleteSubscription() {
     this.subServ.deleteSubscription(this.subscription.id).subscribe(sub => {
-      this.deleted = true;
+      this.DeleteEvent.emit(this.subscription);
     });
-
-  }
+    }
   getAmountOfFlights() {
     if (this.subscription.flights.length === 0) {
       this._stringForFlights = 'No Flights';

@@ -26,7 +26,9 @@ export class SubscriptionListComponent implements OnInit {
   ngOnInit() {
     this.getSubscriptions();
   }
-
+  updateList() {
+    this.getSubscriptions();
+  }
   getSubscriptions() {
     this.subServ.getByUserId(this.user.id).subscribe(subscriptions => {
         this.loading = false;
