@@ -39,12 +39,15 @@ export class FlightComponent implements OnInit {
       this.legs = this.flight.legs;
       this._departureTime = new Date(this.legs[0].toff);
       const dp = new DatePipe('da-DK');
-      this._departureDate = dp.transform(this._departureDate, 'yyyyMMdd');
+      this._departureDate = dp.transform(this._departureTime, 'yyyyMMdd');
+      this._departureDate = this._departureTime.getFullYear().toString() + (this._departureTime.getMonth() + 1 ).toString() + this._departureTime.getDate().toString();
     }
   }
 
   createReservation() {
-    this.router.navigate(['/resdet'], {queryParams: {d: this._departureDate, f: this.flight.id, u: this._user.id}});
+
+    this.router.navigate(['/resdet'], {queryParams: {d: this._departureDate, f: this.flight.id}});
+    console.log(this._departureDate, this.flight.id);
   }
 }
 

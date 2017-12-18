@@ -33,9 +33,8 @@ export class ReserveFormDetailComponent implements OnInit {
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       //formated the date as yyyy-MM-dd
-      this._bookingDate = params.d.splice(0, 4) + '-' + params.d.slice(4, 6) + '-' + params.d.slice(6);
+      this._bookingDate = params.d.slice(0, 4) + '-' + params.d.slice(4, 6) + '-' + params.d.slice(6);
       this._bookingFlightID = params.f;
-      this._bookingRequesterID = params.i;
     });
     this.flightSer.getByFlightId(this._bookingFlightID).subscribe(flight => this._flight = flight);
     this.checkUser();
