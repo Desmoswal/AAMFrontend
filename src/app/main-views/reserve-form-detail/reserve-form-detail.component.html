@@ -9,8 +9,8 @@
           <label>Asset</label>
         </div>
         <div class="col-sm-8">
-          <select name="asset" [(ngModel)]="model.asset" #asset="ngModel">
-            <option value="asset1">asset1</option>
+          <select name="asset" [(ngModel)]="model.asset" #asset="ngModel" required=required>
+            <option value="asset1" selected>asset1</option>
             <option value="asset2">asset2</option>
             <option value="asset3">asset3</option>
           </select>
@@ -22,7 +22,7 @@
         </div>
         <div class="col-sm-8">
           <select name="department" [(ngModel)]="model.department" #department="ngModel">
-            <option value="dep1">department1</option>
+            <option value="dep1" selected>department1</option>
             <option value="dep2">department2</option>
             <option value="dep3">department3</option>
           </select>
