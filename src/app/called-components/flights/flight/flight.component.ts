@@ -32,6 +32,7 @@ export class FlightComponent implements OnInit {
 
   ngOnInit() {
     this.checkLegs();
+
   }
 
   checkLegs() {

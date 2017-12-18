@@ -26,14 +26,16 @@ export class SubscriptionListComponent implements OnInit {
   ngOnInit() {
     this.getSubscriptions();
   }
-
+  updateList() {
+    this.getSubscriptions();
+  }
   getSubscriptions() {
     this.subServ.getByUserId(this.user.id).subscribe(subscriptions => {
         this.loading = false;
         this.subscriptions = subscriptions;
         if (subscriptions.length === 0) {
+          this.noSubscriptions = true;
         }
-        this.noSubscriptions = true;
       }
     );
   }
