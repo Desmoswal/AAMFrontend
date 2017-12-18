@@ -19,9 +19,11 @@ export class FlightComponent implements OnInit {
   @Input() set user(user: User) {
     this._user = user;
   }
+
   @Input() set bookingButton(button: boolean) {
     this._bookingButton = button;
   }
+
   legs: Leg[];
   _departureTime: Date;
   _departureDate: string;
@@ -41,7 +43,7 @@ export class FlightComponent implements OnInit {
       this._departureTime = new Date(this.legs[0].toff);
       const dp = new DatePipe('da-DK');
       this._departureDate = dp.transform(this._departureTime, 'yyyyMMdd');
-      this._departureDate = this._departureTime.getFullYear().toString() + (this._departureTime.getMonth() + 1 ).toString() + this._departureTime.getDate().toString();
+      this._departureDate = this._departureTime.getFullYear().toString() + (this._departureTime.getMonth() + 1).toString() + this._departureTime.getDate().toString();
     }
   }
 
@@ -52,7 +54,7 @@ export class FlightComponent implements OnInit {
     this.router.navigateByUrl('resdet?d=20171218&f=1');
     console.log(this._departureDate, this.flight.id);
 
-   // this.router.navigate(['/resdet?d='+this._departureDate+'&f='+this.flight.id+'&i='+this._user.id]);
+    // this.router.navigate(['/resdet?d='+this._departureDate+'&f='+this.flight.id+'&i='+this._user.id]);
 
   }
 }
