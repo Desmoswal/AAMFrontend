@@ -26,7 +26,7 @@ export class FlightComponent implements OnInit {
   _departureTime: Date;
   _departureDate: string;
 
-  constructor(private router: Router, private datePipe: DatePipe) {
+  constructor(private router: Router) {
 
   }
 
@@ -39,7 +39,8 @@ export class FlightComponent implements OnInit {
       this.legs = this.flight.legs;
       this._departureTime = new Date(this.legs[0].toff);
       const dp = new DatePipe('da-DK');
-      this._departureDate = dp.transform(this._departureDate, 'yyyyMMdd');
+      this._departureDate = dp.transform(this._departureTime, 'yyyyMMdd');
+      this._departureDate = this._departureTime.getFullYear().toString() + (this._departureTime.getMonth() + 1 ).toString() + this._departureTime.getDate().toString();
     }
   }
 

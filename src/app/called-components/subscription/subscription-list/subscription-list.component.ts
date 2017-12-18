@@ -17,13 +17,14 @@ export class SubscriptionListComponent implements OnInit {
 
   @Input() user: User;
 
-  noSupscriptions = false;
+  noSubscriptions = false;
 
   constructor(private subServ: SubscriptionService) {
   }
 
 
   ngOnInit() {
+    this.getSubscriptions();
   }
 
   getSubscriptions() {
@@ -32,7 +33,7 @@ export class SubscriptionListComponent implements OnInit {
         this.subscriptions = subscriptions;
         if (subscriptions.length === 0) {
         }
-        this.noSupscriptions = true;
+        this.noSubscriptions = true;
       }
     );
   }

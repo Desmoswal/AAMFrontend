@@ -7,6 +7,7 @@ import {UserService} from '../../shared/users/user.service';
 import {FlightService} from '../../shared/flights/flight.service';
 import {User} from '../../shared/users/user.model';
 import {Flight} from '../../shared/flights/flight.model';
+import {TokenService} from '../../shared/login/shared/token.service';
 
 @Component({
   selector: 'app-reserve-form-detail',
@@ -25,20 +26,32 @@ export class ReserveFormDetailComponent implements OnInit {
               private service: EmailService,
               private route: ActivatedRoute,
               private userSer: UserService,
-              private flightSer: FlightService) {
+              private flightSer: FlightService,
+              private  tokServ: TokenService) {
   }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       //formated the date as yyyy-MM-dd
-      this._bookingDate = params.d.splice(0, 4) + '-' + params.d.slice(4, 6) + '-' + params.d.slice(6);
+      this._bookingDate = params.d.slice(0, 4) + '-' + params.d.slice(4, 6) + '-' + params.d.slice(6);
       this._bookingFlightID = params.f;
-      this._bookingRequesterID = params.i;
     });
     this.flightSer.getByFlightId(this._bookingFlightID).subscribe(flight => this._flight = flight);
-    this.userSer.getById(this._bookingRequesterID).subscribe(user => this._user = user);
+    this.checkUser();
   }
 
+  checkUser() {
+    if (typeof this._user === 'undefined') {
+      if (localStorage.getItem('token')) {
+        this.tokServ.getUserFromToken().subscribe(outputUser => {
+          this._user = outputUser;
+        });
+      }
+      else {
+        this.router.navigateByUrl('/login');
+      }
+    }
+  }
 
   validate(formcontent: Map<any, any>, keys: Array<any>): boolean {
     let allValid:boolean = false;

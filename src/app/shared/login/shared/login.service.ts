@@ -6,17 +6,18 @@ import {Observable} from 'rxjs/Observable';
 import {environment} from '../../../../environments/environment';
 import {Payload} from './payload.model';
 import {UserService} from '../../users/user.service';
+import {Router} from '@angular/router';
 
 const url = environment.apiEndpoint + '/login';
 
 @Injectable()
 export class LoginService {
 
-  public currentUser: User;
+  //public currentUser: User;
 
   constructor(private http: HttpClient,
               private tokenService: TokenService,
-              private userSer: UserService) {
+              private router: Router) {
 
   }
 
@@ -29,19 +30,13 @@ export class LoginService {
     ).switchMap(payload => Observable.create(obs => {
       const obj: Payload = payload;
       this.tokenService.setToken(obj.token);
-      localStorage.setItem('Id', obj.userID.toString());
-      this.userSer.getById(obj.userID).subscribe(outputUser => {
-        this.currentUser = outputUser;
-        obs.next(payload);
-      });
+      obs.next(payload);
     }));
   }
 
   public logout(): Observable<boolean> {
     return Observable.create(obs => {
       this.tokenService.clearToken();
-      localStorage.removeItem('Id');
-      this.currentUser = null;
       obs.next(!this.tokenService.getToken());
     });
   }
