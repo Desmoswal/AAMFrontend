@@ -5,14 +5,14 @@ import {Leg} from '../legs/leg.model';
 import {HttpClient} from '@angular/common/http';
 import {Subscription} from './subscription.model';
 
-const url = environment.apiEndpoint + 'subscriptions';
+const url = environment.apiEndpoint + '/subscribtion';
 
 @Injectable()
 export class SubscriptionService {
   constructor(private http: HttpClient) { }
 
   getByUserId(id: number): Observable<Subscription[]> {
-    return this.http.get<Subscription[]>(url + '/' + id);
+    return this.http.get<Subscription[]>(url + '/byuserid/' + id);
   }
 
   createSubscription(userId: number, date: string): Observable<Subscription> {

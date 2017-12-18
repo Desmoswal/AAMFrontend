@@ -10,7 +10,7 @@ export class HomeComponent implements OnInit {
   user: User = new User();
 
   constructor() {
-    this.user.id = 1;
+    this.user.id = 2;
     this.user.type = 1;
   }
 
