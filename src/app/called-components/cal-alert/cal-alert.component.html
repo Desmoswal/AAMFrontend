@@ -1,8 +1,9 @@
 <div class="container">
-  <div *ngIf="dateHasFlights()">
-    <app-flight-list ></app-flight-list>
+  <div *ngIf="_hasFlights">
+    <h4 style="padding-top: 10px"> Flights for the {{_displayDate}}</h4>
+    <app-flight-list [user]="user" [flights]="flights" [bookingButton]= "true"></app-flight-list>
   </div>
-  <div *ngIf="!dateHasFlights()">
-    <app-no-flight-alert [receivedDate]="_dateString"></app-no-flight-alert>
+  <div *ngIf="!_hasFlights">
+    <app-no-flight-alert [user]="user" [receivedDate]="_dateString"></app-no-flight-alert>
   </div>
 </div>

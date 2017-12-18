@@ -5,9 +5,7 @@ import {
 import {
   CalendarEvent,
 } from 'angular-calendar';
-import {ActivatedRoute, Router} from '@angular/router';
 import 'rxjs/add/operator/switchMap';
-import {DateStringService} from '../../shared/date-string-service';
 
 
 @Component({
