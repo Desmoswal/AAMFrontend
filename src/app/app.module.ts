@@ -36,6 +36,7 @@ import {PlannerGuard} from './shared/login/auth/planner.guard';
 import {UserService} from './shared/users/user.service';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {RouterModule, Routes} from '@angular/router';
+import { SearchPipe } from './called-components/flights/flight-list/search.pipe';
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -66,7 +67,8 @@ const appRoutes: Routes = [
     CalAlertComponent,
     NoFlightAlertComponent,
     LegListComponent,
-    ReserveFormDetailComponent
+    ReserveFormDetailComponent,
+    SearchPipe
   ],
   imports: [
     ReactiveFormsModule,
