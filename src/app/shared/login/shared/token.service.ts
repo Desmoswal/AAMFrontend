@@ -8,8 +8,6 @@ import {UserService} from '../../users/user.service';
 
 @Injectable()
 export class TokenService {
-  currentUser: User;
-
 
   constructor(private userSer: UserService) {
   }
@@ -33,29 +31,17 @@ export class TokenService {
     });
   }
 
-  public getUserFromToken(): Observable<UserAuth> {
+  public getUserFromToken(): Observable<User> {
     return Observable.create(obs => {
-      const token = this.getToken();
-      let decoded: UserAuth;
-      const jwt = new JwtHelper();
-      decoded = jwt.decodeToken(token);
-      obs.next(decoded);
-    });
-
+        const token = this.getToken();
+        let decoded: UserAuth;
+        const jwt = new JwtHelper();
+        decoded = jwt.decodeToken(token);
+        this.userSer.getById(Number(decoded.UserID)).subscribe(outputUser => {
+          obs.next(outputUser);
+        });
+      }
+    );
   }
-
-  // public getCurrentUser(): boolean{
-  //   const id = localStorage.getItem('id');
-  //   return Observable.create(observable => {
-  //     this.userSer.getById(Number(id)).switchMap(userOutput => Observable.create(ob => {
-  //         this.currentUser = userOutput;
-  //         console.log(userOutput.id);
-  //         console.log(this.currentUser.id);
-  //         ob.next();
-  //       }
-  //     ));
-  //     observable.next();
-  //   });
-  // }
 }
 

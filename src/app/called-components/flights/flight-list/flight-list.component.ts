@@ -3,6 +3,7 @@ import {Flight} from '../../../shared/flights/flight.model';
 import {FlightService} from '../../../shared/flights/flight.service';
 import {DatePipe} from '@angular/common';
 import {User} from '../../../shared/users/user.model';
+import {UserService} from '../../../shared/users/user.service';
 
 @Component({
   selector: 'app-flight-list',
@@ -36,7 +37,7 @@ export class FlightListComponent implements OnInit {
   noFlights = false;
   loading = false;
 
-  constructor(private flightServ: FlightService, private datePipe: DatePipe) {
+  constructor(private flightServ: FlightService, private datePipe: DatePipe, private userServ: UserService) {
 
   }
 
@@ -93,10 +94,10 @@ export class FlightListComponent implements OnInit {
     }
     //normal users can only get their flights
     if (this.user.type === 2) {
-      this.flightServ.getByUserId(this.user.id).subscribe(flights => {
+      this.userServ.getById(this.user.id).subscribe(user => {
         this.loading = false;
-        this._flights = flights;
-        if (flights.length === 0) {
+        this._flights = user.flights;
+        if (user.flights.length === 0) {
           this.noFlights = true;
         }
       })
