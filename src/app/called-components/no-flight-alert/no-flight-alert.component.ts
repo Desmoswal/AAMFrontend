@@ -2,6 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {SubscriptionService} from '../../shared/subscriptions/subscription.service';
 import {User} from '../../shared/users/user.model';
 import {DatePipe} from '@angular/common';
+import {Subscription} from '../../shared/subscriptions/subscription.model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-no-flight-alert',
@@ -17,7 +19,7 @@ export class NoFlightAlertComponent implements OnInit {
     this._recievedDate = date.slice(0, 4) + '-' + date.slice(4, 6) + '-' + date.slice(6);
   }
 
-  constructor(private subServ: SubscriptionService) {
+  constructor(private subServ: SubscriptionService, private router: Router) {
 
   }
 
@@ -25,7 +27,9 @@ export class NoFlightAlertComponent implements OnInit {
   }
 
   createSub() {
-    this.subServ.createSubscription(this.user.id, this.receivedDate);
+    this.subServ.createSubscription(this.user.id, this._recievedDate).subscribe(event =>{
+      this.router.navigateByUrl('/home');
+    });
   }
 
 }

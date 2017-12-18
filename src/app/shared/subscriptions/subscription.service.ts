@@ -17,7 +17,10 @@ export class SubscriptionService {
   }
 
   createSubscription(userId: number, date: string): Observable<Subscription> {
-    return this.http.post<Subscription>( userId.toString(), date);
+   const date2 = date;
+   console.log(date2);
+    return this.http.post<Subscription>(url, { userId, date});
+
   }
   deleteSubscription(subId: number): Observable<Subscription>  {
     return this.http.delete<Subscription>(url + '/' + subId);
