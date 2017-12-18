@@ -16,6 +16,9 @@ export class SubscriptionService {
   }
 
   createSubscription(userId: number, date: string): Observable<Subscription> {
-    return this.http.post<Subscription>(userId.toString(), date);
+    return this.http.post<Subscription>( userId.toString(), date);
+  }
+  deleteSubscription(subId: number): Observable<Subscription>  {
+   return this.http.delete<Subscription>(url + '/' + subId);
   }
 }
