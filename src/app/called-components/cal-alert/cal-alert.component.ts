@@ -14,7 +14,7 @@ import {TokenService} from '../../shared/login/shared/token.service';
   styleUrls: ['./cal-alert.component.css']
 })
 export class CalAlertComponent implements OnInit {
-  user: User;
+  @Input() _user: User;
   _dateString: string;
   _displayDate: string;
   _hasFlights: boolean = false;
@@ -23,42 +23,23 @@ export class CalAlertComponent implements OnInit {
   @Input() set recievedDate(date: Date) {
 
     if (typeof date === 'undefined') {
-      this.setDate();
+      this._dateString = this.datePipe.transform(new Date(), 'yyyyMMdd');
     }
     else {
       this._dateString = this.datePipe.transform(date, 'yyyyMMdd');
-      this._displayDate = this._dateString.slice(0, 4) + '-' + this._dateString.slice(4, 6) + '-' + this._dateString.slice(6);
+
       this.dateHasFlights();
     }
+    this._displayDate = this._dateString.slice(0, 4) + '-' + this._dateString.slice(4, 6) + '-' + this._dateString.slice(6);
   }
 
   constructor(private route: ActivatedRoute,
               private datePipe: DatePipe,
-              private flightServ: FlightService, private tokServ: TokenService, private router: Router) {
+              private flightServ: FlightService) {
   }
 
   ngOnInit() {
-    this.checkUser();
-  }
-
-  checkUser() {
-    if (typeof this.user === 'undefined') {
-      if (localStorage.getItem('token')) {
-        this.tokServ.getUserFromToken().subscribe(outputUser => {
-          this.user = outputUser;
-        });
-      }
-      else {
-        this.router.navigateByUrl('/login');
-      }
-    }
-  }
-
-  setDate() {
-    this.route.queryParams.subscribe(params => {
-      this._dateString = params.date;
-      this.dateHasFlights();
-    });
+    this.dateHasFlights();
   }
 
   dateHasFlights() {

@@ -10,8 +10,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  isPlanner: boolean;
-  date: string;
+  @Input() isPlanner: boolean;
   @Input() loggedIn: boolean;
   @Output() LogOut = new EventEmitter();
 
@@ -20,7 +19,7 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.date = this.datePipe.transform(new Date(), 'yyyyMMdd');
+
     this.tokeServ.isAuthenticated().subscribe(auth => this.loggedIn = auth);
     if (this.loggedIn) {
       this.tokeServ.getUserFromToken().subscribe(user => {

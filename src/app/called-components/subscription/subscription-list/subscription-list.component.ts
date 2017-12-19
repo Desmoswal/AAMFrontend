@@ -15,7 +15,7 @@ export class SubscriptionListComponent implements OnInit {
   subscriptions: Subscription[];
   loading = true;
 
-  @Input() user: User;
+  @Input() _user: User;
 
   noSubscriptions = false;
 
@@ -30,7 +30,7 @@ export class SubscriptionListComponent implements OnInit {
     this.getSubscriptions();
   }
   getSubscriptions() {
-    this.subServ.getByUserId(this.user.id).subscribe(subscriptions => {
+    this.subServ.getByUserId(this._user.id).subscribe(subscriptions => {
         this.loading = false;
         this.subscriptions = subscriptions;
         if (subscriptions.length === 0) {

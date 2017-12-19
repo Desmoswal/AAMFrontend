@@ -20,6 +20,7 @@ export class LegComponent implements OnInit {
   }
 
   setDelayString() {
+    this.leg.delay = this.leg.delay.replace('-', '');
     const array = this.leg.delay.split(':').map(Number);
 
     const hours = array[0];

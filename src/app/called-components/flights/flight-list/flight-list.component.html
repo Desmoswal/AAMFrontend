@@ -1,11 +1,11 @@
-<div class="container" *ngIf="user">
+<div class="container" *ngIf="_user">
   <div *ngIf="loading" class="row">
     <div id="loadingIMG"></div>
     <p>Fetching information</p>
   </div>
-  <input type="text" value="" class="form-control" placeholder="Search..." [(ngModel)]="searchText">
+  <input *ngIf ="_user.type ==1 && _getType ==1" type="text" value="" class="form-control" placeholder="Search..." [(ngModel)]="searchText"_>
   <div *ngFor="let flighthtml of _flights | search:searchText" class="list-group-item list-group-item-action">
-    <app-flight [flight]="flighthtml" [bookingButton]="_bookingButton" [user]="user"></app-flight>
+    <app-flight [flight]="flighthtml" [bookingButton]="_bookingButton" [_user]="_user"></app-flight>
   </div>
   <div *ngIf="noFlights">
     <p>No flights scheduled</p>

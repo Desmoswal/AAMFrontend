@@ -15,10 +15,7 @@ export class FlightComponent implements OnInit {
 
   _bookingButton: boolean;
   @Input() flight: Flight;
-  _user: User;
-  @Input() set user(user: User) {
-    this._user = user;
-  }
+  @Input()_user: User;
 
   @Input() set bookingButton(button: boolean) {
     this._bookingButton = button;

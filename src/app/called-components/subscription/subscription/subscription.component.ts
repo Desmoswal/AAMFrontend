@@ -15,6 +15,7 @@ export class SubscriptionComponent implements OnInit {
   _departureDate: string;
   _departureTime: Date;
   _stringForFlights;
+  _flightsAvail: boolean;
 
   constructor(private subServ: SubscriptionService, private router: Router) {
   }
@@ -29,20 +30,28 @@ export class SubscriptionComponent implements OnInit {
     const dp = new DatePipe('da-DK');
     this._departureDate = dp.transform(this._departureTime, 'yyyyMMdd');
     this._departureDate = this._departureTime.getFullYear().toString() +
-      (this._departureTime.getMonth() + 1 ).toString() + this._departureTime.getDate().toString();
+      (this._departureTime.getMonth() + 1).toString() + this._departureTime.getDate().toString();
   }
 
   deleteSubscription() {
     this.subServ.deleteSubscription(this.subscription.id).subscribe(sub => {
       this.DeleteEvent.emit(this.subscription);
     });
-    }
+  }
+
   getAmountOfFlights() {
     if (this.subscription.flights.length === 0) {
-      this._stringForFlights = 'No Flights';
+      this._stringForFlights = 'No flights available';
     }
     else {
-        this._stringForFlights = 'There is ' + this.subscription.flights.length + ' flight(s) available';
+      this._flightsAvail = true;
+
+      if (this.subscription.flights.length === 1) {
+        this._stringForFlights = 'There is ' + this.subscription.flights.length + ' flight available';
+      }
+      else {
+        this._stringForFlights = 'There are ' + this.subscription.flights.length + ' flights available';
+      }
     }
   }
 

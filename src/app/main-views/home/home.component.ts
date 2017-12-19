@@ -15,7 +15,7 @@ import {UserAuth} from '../../shared/login/shared/userAuth.model';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  user: User;
+  _user: User;
 
 
   constructor(private tokServ: TokenService,
@@ -28,10 +28,10 @@ export class HomeComponent implements OnInit {
   }
 
   checkUser() {
-    if (typeof this.user === 'undefined') {
+    if (typeof this._user === 'undefined') {
       if (localStorage.getItem('token')) {
         this.tokServ.getUserFromToken().subscribe(outputUser => {
-          this.user = outputUser;
+          this._user = outputUser;
         });
       }
       else {

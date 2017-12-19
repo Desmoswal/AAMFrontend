@@ -11,25 +11,54 @@ import {Router} from '@angular/router';
   styleUrls: ['./no-flight-alert.component.css']
 })
 export class NoFlightAlertComponent implements OnInit {
-
+  subscribed: boolean = false;
   _recievedDate: string;
-  @Input() user: User;
+  @Input() _user: User;
+  checkedSubs: boolean = false;
+  existingSub: boolean;
 
   @Input() set receivedDate(date: string) {
     this._recievedDate = date.slice(0, 4) + '-' + date.slice(4, 6) + '-' + date.slice(6);
+    this.subscribed = false;
   }
 
-  constructor(private subServ: SubscriptionService, private router: Router) {
+  constructor(private subServ: SubscriptionService) {
 
   }
 
   ngOnInit() {
+    this.getSubscriptions();
   }
 
   createSub() {
-    this.subServ.createSubscription(this.user.id, this._recievedDate).subscribe(event =>{
-      this.router.navigateByUrl('/home');
+    this.subServ.createSubscription(this._user.id, this._recievedDate).subscribe(event => {
+      this.subscribed = true;
     });
   }
 
+  getSubscriptions() {
+    this.subServ.getByUserId(this._user.id).subscribe(subscriptions => {
+        this.checkedSubs = true;
+        if (subscriptions.length !== 0) {
+          const subArray: Date[] = new Array<Date>();
+          for (let i = 0; i < subscriptions.length; i++) {
+            const date = new Date(subscriptions[i].date);
+            subArray.push(date);
+          }
+          const x = 'T00:00:00';
+          const time = this._recievedDate.concat(x);
+          const recDate = new Date(time);
+
+          for (let i = 0; i < subArray.length; i++) {
+
+            if (recDate.valueOf() - subArray[i].valueOf()) {
+              this.existingSub = true;
+            }
+          }
+
+        }
+      }
+    );
+
+  }
 }
