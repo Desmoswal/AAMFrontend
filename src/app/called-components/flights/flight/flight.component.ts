@@ -14,6 +14,7 @@ import {User} from '../../../shared/users/user.model';
 export class FlightComponent implements OnInit {
 
   _bookingButton: boolean;
+  _hasLegs: boolean = true;
 
   @Input() _flight: Flight;
 
@@ -36,13 +37,13 @@ export class FlightComponent implements OnInit {
     this.checkLegs();
   }
 
+
   checkLegs() {
     if (typeof this._flight.legs === 'undefined') {
       this._departureDate = 'To be confirmed';
     }
     else {
       this.legs = this._flight.legs;
-
       if (typeof this._flight.legs[0] === 'undefined') {
         this._departureDate = 'To be confirmed';
       }
@@ -65,10 +66,14 @@ export class FlightComponent implements OnInit {
 
   createReservation() {
     //this.router.navigate(['/resdet'], {queryParams: {d: this._departureDate, f: this.flight.id}});
-    this.router.navigateByUrl('resdet?d=20171218&f=1');
-    console.log(this._departureDate, this._flight.id);
-
+    // this.router.navigateByUrl('resdet?d=20171218&f=1');
+    // console.log(this._departureDate, this._flight.id);
     // this.router.navigate(['/resdet?d='+this._departureDate+'&f='+this.flight.id+'&i='+this._user.id]);
+
+    if (typeof this._departureDate !== 'undefined') {
+      this._hasLegs = false;
+      this.router.navigate(['/resdet'], {queryParams: {d: this._departureDate, f: this._flight.id}});
+    }
   }
 }
 

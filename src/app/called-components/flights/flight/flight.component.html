@@ -1,4 +1,4 @@
-<div class="container" *ngIf="_user && _flight" >
+<div class="container" *ngIf="_user && _flight">
   <ngb-accordion #acc="ngbAccordion">
     <ngb-panel>
       <ng-template ngbPanelTitle>
@@ -6,37 +6,40 @@
           <div class="col"><b>{{_flight.flightNo}}</b></div>
           <div class="col" *ngIf="_user.type==1"><b>Seats Available: </b> {{_flight.seatsAvailable}}</div>
           <div class="col" style="text-align: right"><b>Dept: </b> {{_departureTime | date: "MMM d, y h:mm a"}}</div>
-          <div *ngIf="_bookingButton" class="col">
+          <div *ngIf="_bookingButton && _hasLegs" class="col">
             <button class="btn btn-primary" (click)="createReservation()">Book</button>
+          </div>
+          <div *ngIf="_bookingButton && !_hasLegs || _bookingButton && _flight.seatsAvailable<=0 " class="col">
+            <button class="btn btn-secondary" [disabled]="true">Cannot book</button>
           </div>
         </div>
       </ng-template>
-      <ng-template ngbPanelContent >
+      <ng-template ngbPanelContent>
         <div *ngIf="legs.length!=0">
-        <div class="row text-center" style="padding-left: 1.5em; padding-right: 2.5em;">
-          <div class="col heading">
-            Dept Location
+          <div class="row text-center" style="padding-left: 1.5em; padding-right: 2.5em;">
+            <div class="col heading">
+              Dept Location
+            </div>
+            <div class="col heading">
+              Arr Location
+            </div>
+            <div class="col heading">
+              Standard Time of Arrival
+            </div>
+            <div class="col heading">
+              Standard Time of Departure
+            </div>
+            <div class="col heading">
+              Take Off
+            </div>
+            <div class="col heading">
+              Touch Down
+            </div>
+            <div class="col heading">
+              Delay
+            </div>
           </div>
-          <div class="col heading">
-            Arr Location
-          </div>
-          <div class="col heading">
-            Standard Time of Arrival
-          </div>
-          <div class="col heading">
-            Standard Time of Departure
-          </div>
-          <div class="col heading">
-            Take Off
-          </div>
-          <div class="col heading">
-            Touch Down
-          </div>
-          <div class="col heading">
-            Delay
-          </div>
-        </div>
-        <app-leg-list [legs]="legs"></app-leg-list>
+          <app-leg-list [legs]="legs"></app-leg-list>
         </div>
         <div *ngIf="legs.length===0">
           <div class="row text-center" style="padding-left: 1.5em; padding-right: 2.5em;">
