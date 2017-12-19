@@ -14,8 +14,10 @@ import {User} from '../../../shared/users/user.model';
 export class FlightComponent implements OnInit {
 
   _bookingButton: boolean;
-  @Input() flight: Flight;
-  @Input()_user: User;
+
+  @Input() _flight: Flight;
+
+  @Input() _user: User;
 
   @Input() set bookingButton(button: boolean) {
     this._bookingButton = button;
@@ -30,29 +32,43 @@ export class FlightComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.checkLegs();
 
+    this.checkLegs();
   }
 
   checkLegs() {
-    if (this.flight.legs !== null) {
-      this.legs = this.flight.legs;
-      this._departureTime = new Date(this.legs[0].toff);
-      const dp = new DatePipe('da-DK');
-      this._departureDate = dp.transform(this._departureTime, 'yyyyMMdd');
-      this._departureDate = this._departureTime.getFullYear().toString() + (this._departureTime.getMonth() + 1).toString() + this._departureTime.getDate().toString();
+    if (typeof this._flight.legs === 'undefined') {
+      this._departureDate = 'To be confirmed';
+    }
+    else {
+      this.legs = this._flight.legs;
+
+      if (typeof this._flight.legs[0] === 'undefined') {
+        this._departureDate = 'To be confirmed';
+      }
+      else {
+        if (typeof this.legs[0].toff === 'undefined') {
+          this._departureDate = 'To be confirmed';
+        }
+        else {
+          this._departureTime = new Date(this.legs[0].toff);
+          const dp = new DatePipe('da-DK');
+          this._departureDate = dp.transform(this._departureTime, 'yyyyMMdd');
+          this._departureDate = this._departureTime.getFullYear()
+            .toString() + (this._departureTime.getMonth() + 1)
+            .toString() + this._departureTime.getDate()
+            .toString();
+        }
+      }
     }
   }
 
   createReservation() {
-
-
     //this.router.navigate(['/resdet'], {queryParams: {d: this._departureDate, f: this.flight.id}});
     this.router.navigateByUrl('resdet?d=20171218&f=1');
-    console.log(this._departureDate, this.flight.id);
+    console.log(this._departureDate, this._flight.id);
 
     // this.router.navigate(['/resdet?d='+this._departureDate+'&f='+this.flight.id+'&i='+this._user.id]);
-
   }
 }
 

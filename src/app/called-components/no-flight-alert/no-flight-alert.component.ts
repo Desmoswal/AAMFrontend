@@ -20,6 +20,9 @@ export class NoFlightAlertComponent implements OnInit {
   @Input() set receivedDate(date: string) {
     this._recievedDate = date.slice(0, 4) + '-' + date.slice(4, 6) + '-' + date.slice(6);
     this.subscribed = false;
+    this.checkedSubs = false;
+    this.existingSub = false;
+    this.getSubscriptions();
   }
 
   constructor(private subServ: SubscriptionService) {
@@ -38,7 +41,6 @@ export class NoFlightAlertComponent implements OnInit {
 
   getSubscriptions() {
     this.subServ.getByUserId(this._user.id).subscribe(subscriptions => {
-        this.checkedSubs = true;
         if (subscriptions.length !== 0) {
           const subArray: Date[] = new Array<Date>();
           for (let i = 0; i < subscriptions.length; i++) {
@@ -50,13 +52,12 @@ export class NoFlightAlertComponent implements OnInit {
           const recDate = new Date(time);
 
           for (let i = 0; i < subArray.length; i++) {
-
             if (recDate.valueOf() - subArray[i].valueOf()) {
               this.existingSub = true;
             }
           }
-
         }
+        this.checkedSubs = true;
       }
     );
 

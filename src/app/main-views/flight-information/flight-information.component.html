@@ -1,4 +1,4 @@
-<div class="container" *ngIf = "user">
+<div class="container" *ngIf = "_user">
   <div>
     <app-navbar></app-navbar>
   </div>
@@ -10,7 +10,7 @@
     </div>
     <div class="row">
       <div class="col-md-12">
-        <app-flight-list [_user] = "user" [getType]="'getAll'" ></app-flight-list>
+        <app-flight-list [_user] = "_user" [getType]="'getAll'" ></app-flight-list>
       </div>
     </div>
   </div>

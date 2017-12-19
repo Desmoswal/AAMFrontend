@@ -10,17 +10,17 @@ import {Router} from '@angular/router';
 })
 export class FlightInformationComponent implements OnInit {
 
-  user: User;
+  _user: User;
   constructor(private tokServ: TokenService, private router: Router) { }
 
   ngOnInit() {
     this.checkUser();
   }
   checkUser() {
-    if (typeof this.user === 'undefined') {
+    if (typeof this._user === 'undefined') {
       if (localStorage.getItem('token')) {
         this.tokServ.getUserFromToken().subscribe(outputUser => {
-          this.user = outputUser;
+          this._user = outputUser;
         });
       }
       else {

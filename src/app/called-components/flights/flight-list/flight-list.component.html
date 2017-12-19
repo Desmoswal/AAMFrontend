@@ -3,9 +3,10 @@
     <div id="loadingIMG"></div>
     <p>Fetching information</p>
   </div>
-  <input *ngIf ="_user.type ==1 && _getType ==1" type="text" value="" class="form-control" placeholder="Search..." [(ngModel)]="searchText"_>
+  <input *ngIf="_user.type ==1 && _getType =='getAll'" type="text" value="" class="form-control" placeholder="Search..."
+         [(ngModel)]="searchText" _>
   <div *ngFor="let flighthtml of _flights | search:searchText" class="list-group-item list-group-item-action">
-    <app-flight [flight]="flighthtml" [bookingButton]="_bookingButton" [_user]="_user"></app-flight>
+    <app-flight [_flight]="flighthtml" [bookingButton]="_bookingButton" [_user]="_user"></app-flight>
   </div>
   <div *ngIf="noFlights">
     <p>No flights scheduled</p>
