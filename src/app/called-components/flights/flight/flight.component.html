@@ -7,7 +7,7 @@
           <div class="col" *ngIf="_user.type==1"><b>Seats Available: </b> {{_flight.seatsAvailable}}</div>
           <div class="col" style="text-align: right"><b>Dept: </b> {{_departureTime | date: "MMM d, y h:mm a"}}</div>
           <div *ngIf="_bookingButton" class="col">
-            <button class="btn btn-primary" (click)="createReservation()">Book</button>
+            <button class="btn btn-primary" (click)="createReservation($event)">Book</button>
           </div>
         </div>
       </ng-template>

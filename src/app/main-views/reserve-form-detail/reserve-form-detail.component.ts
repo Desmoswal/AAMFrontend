@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {EmailService} from '../../shared/email/email.service';
 import {Email} from '../../shared/email/email.model';
 import 'rxjs/add/operator/switchMap';
@@ -31,13 +31,14 @@ export class ReserveFormDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      //formated the date as yyyy-MM-dd
-      this._bookingDate = params.d.slice(0, 4) + '-' + params.d.slice(4, 6) + '-' + params.d.slice(6);
-      this._bookingFlightID = params.f;
+    this.route.paramMap.subscribe(params => {
+      // formated the date as yyyy-MM-dd
+      this._bookingDate = params.get('d').slice(0, 4) + '-' + params.get('d').slice(4, 6) + '-' + params.get('d').slice(6);
+      this._bookingFlightID = +params.get('f');
+      console.log(this._bookingDate + ' ' + this._bookingFlightID);
+      //this.flightSer.getByFlightId(this._bookingFlightID).subscribe(flight => this._flight = flight);
+      //this.checkUser();
     });
-    this.flightSer.getByFlightId(this._bookingFlightID).subscribe(flight => this._flight = flight);
-    this.checkUser();
   }
 
   checkUser() {

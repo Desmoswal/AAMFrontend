@@ -43,10 +43,10 @@ const appRoutes: Routes = [
   {path: 'home', component: HomeComponent,   canActivate: [AuthGuard]},
   {path: 'reserve', component: ReserveFlightComponent},
   {path: 'info', component: FlightInformationComponent},
-  {path: '', component: LoginComponent},
   {path: 'map', component: MapComponent},
-  {path: 'resdet', component: ReserveFormDetailComponent},
-  {path: '**', redirectTo: ''}
+  {path: 'resdet/:d/:f', component: ReserveFormDetailComponent},
+  {path: '', component: LoginComponent},
+   {path: '**', redirectTo: ''}
 ];
 
 @NgModule({
