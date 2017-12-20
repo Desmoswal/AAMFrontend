@@ -14,31 +14,16 @@ export class NavbarComponent implements OnInit {
   @Input() loggedIn: boolean;
   @Output() LogOut = new EventEmitter();
 
-  constructor(private datePipe: DatePipe, private tokeServ: TokenService, private loginServ: LoginService,
-              private router: Router) {
+  constructor(private loginServ: LoginService) {
   }
 
   ngOnInit() {
-
-    this.tokeServ.isAuthenticated().subscribe(auth => this.loggedIn = auth);
-    if (this.loggedIn) {
-      this.tokeServ.getUserFromToken().subscribe(user => {
-        if (user.type === 1) {
-          this.isPlanner = true;
-        }
-        else {
-          this.isPlanner = false;
-        }
-
-      });
-    }
   }
 
   logout() {
     this.loginServ.logout().subscribe(logoutSuccess => {
       this.LogOut.emit(this.loggedIn = false);
       this.LogOut.emit(this.isPlanner = false);
-      this.router.navigateByUrl('/login');
     });
 
   }

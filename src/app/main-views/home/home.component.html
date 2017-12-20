@@ -1,6 +1,6 @@
 <div class="container" *ngIf="_user">
   <div>
-    <app-navbar></app-navbar>
+    <app-navbar [isPlanner]="_user.type=== 1" [loggedIn]="true"></app-navbar>
   </div>
   <div class="viewbody">
     <div *ngIf="_user.type===1" class="flights">

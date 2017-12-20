@@ -20,7 +20,7 @@
             <a class="navbar-brand" [routerLink]="['../info']">Flight Information</a>
           </li>
         </ul>
-        <ul class="nav navbar-nav ml-auto" *ngIf="loggedIn" (click)="logout()">
+        <ul class="nav navbar-nav ml-auto" *ngIf="loggedIn" [routerLink]="['../home']" (click)="logout()">
           <li class="nav-item">
             <a class="btn btn-light">Log out</a>
           </li>

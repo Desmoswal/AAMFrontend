@@ -57,6 +57,7 @@ export class NoFlightAlertComponent implements OnInit {
             }
           }
         }
+        console.log(this.existingSub);
         this.checkedSubs = true;
       }
     );
