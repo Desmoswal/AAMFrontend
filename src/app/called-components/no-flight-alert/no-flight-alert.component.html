@@ -1,12 +1,31 @@
-<div class="card">
-  <h4 class="card-header text-center">No flights on the {{_recievedDate}}</h4>
-  <div class="card-block">
-    <p class="card-text">Would you like to subscribe to this date so that you will be notified when a new flight becomes
-      available?</p>
-    <div class="card-footer text-muted text-right">
-        <button class="btn btn-primary" (click)="createSub()">Subscribe</button>
+<div class="container" *ngIf="_recievedDate && checkedSubs">
+  <div *ngIf="existingSub">
+    <div class="card">
+      <h4 class="card-header text-center" *ngIf="!subscribed">No flights on the {{_recievedDate}}</h4>
+      <div class="card-block" *ngIf="!subscribed">
+        <p class="card-text" *ngIf="!subscribed">Would you like to subscribe to this date so that you will be notified
+          when a new flight
+          becomes
+          available?</p>
+        <div class="card-footer text-muted text-right">
+          <button class="btn btn-primary" (click)="createSub()" *ngIf="!subscribed">Subscribe</button>
+        </div>
+      </div>
+    </div>
+    <div class="card-block" *ngIf="subscribed">
+      <ngb-alert [dismissible]="false">
+        Subscription successfully added
+      </ngb-alert>
+    </div>
+  </div>
+  <div *ngIf="!existingSub">
+    <div class="card">
+      <h4 class="card-header text-center">{{_recievedDate}}</h4>
+      <div class="card-block">
+        <ngb-alert [dismissible]="false">
+          You are already subscribed to this date
+        </ngb-alert>
+      </div>
     </div>
   </div>
 </div>
-
-

@@ -29,5 +29,5 @@ export class CalendarComponent implements OnInit {
 
   dayClicked({date, events}: { date: Date; events: CalendarEvent [] }) {
     this.dateEvent.emit(date);
-  }
+}
 }

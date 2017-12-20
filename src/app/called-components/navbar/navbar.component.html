@@ -1,23 +1,31 @@
-<div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
-  <div class="container">
-    <a class="navbar-brand" href="../../" > <img src="https://2jzyey24fqjic2086240p42h-wpengine.netdna-ssl.com/wp-content/uploads/2017/03/maersk340.png" height="40" class="d-inline-block align-top" alt=""></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarResponsive">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="navbar-brand" [routerLink]="['../reserve']" [queryParams]="{ date: date}">Reserve Flight</a>
-        </li>
-        <li class="nav-item">
-          <a class="navbar-brand" [routerLink]="['../info']" >Flight Information</a>
-        </li>
-      </ul>
-      <ul class="nav navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="navbar-brand"[routerLink]="['../login']">Log in</a>
-        </li>
-      </ul>
+<div class="container">
+  <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
+    <div class="container">
+      <a class="navbar-brand" href="../home"> <img
+        src="https://2jzyey24fqjic2086240p42h-wpengine.netdna-ssl.com/wp-content/uploads/2017/03/maersk340.png"
+        height="40" class="d-inline-block align-top" alt=""></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+              aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav">
+          <li class="nav-item" *ngIf="loggedIn">
+            <a class="navbar-brand" [routerLink]="['../home']">Home</a>
+          </li>
+          <li class="nav-item" *ngIf="isPlanner && loggedIn">
+            <a class="navbar-brand" [routerLink]="['../reserve']">Reserve Flight</a>
+          </li>
+          <li class="nav-item" *ngIf="isPlanner && loggedIn">
+            <a class="navbar-brand" [routerLink]="['../info']">Flight Information</a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav ml-auto" *ngIf="loggedIn" [routerLink]="['../home']" (click)="logout()">
+          <li class="nav-item">
+            <a class="btn btn-light">Log out</a>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>

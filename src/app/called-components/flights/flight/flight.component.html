@@ -1,42 +1,51 @@
-<ngb-accordion #acc="ngbAccordion">
-  <ngb-panel>
-    <ng-template ngbPanelTitle>
-      <div class="row">
-        <div class="col"><b>{{flight.flightNo}}</b></div>
-        <div class="col"><b>Seats Available: </b> {{flight.seatsAvailable}}</div>
-        <div class="col" style="text-align: right"><b>Dept: </b> {{_departureTime | date: "MMM d, y h:mm a"}}</div>
-        <div *ngIf="_bookingButton" class="col">
-          <button class="btn btn-primary" (click)="createReservation()">Book</button>
+<div class="container" *ngIf="_user && _flight" >
+  <ngb-accordion #acc="ngbAccordion">
+    <ngb-panel>
+      <ng-template ngbPanelTitle>
+        <div class="row">
+          <div class="col"><b>{{_flight.flightNo}}</b></div>
+          <div class="col" *ngIf="_user.type==1"><b>Seats Available: </b> {{_flight.seatsAvailable}}</div>
+          <div class="col" style="text-align: right"><b>Dept: </b> {{_departureTime | date: "MMM d, y h:mm a"}}</div>
+          <div *ngIf="_bookingButton" class="col">
+            <button class="btn btn-primary" (click)="createReservation($event)">Book</button>
+          </div>
         </div>
-      </div>
-    </ng-template>
-    <ng-template ngbPanelContent>
-      <div class="row text-center" style="padding-left: 1.5em; padding-right: 2.5em;">
-        <div class="col heading">
-          Dept Location
+      </ng-template>
+      <ng-template ngbPanelContent >
+        <div *ngIf="legs.length!=0">
+        <div class="row text-center" style="padding-left: 1.5em; padding-right: 2.5em;">
+          <div class="col heading">
+            Dept Location
+          </div>
+          <div class="col heading">
+            Arr Location
+          </div>
+          <div class="col heading">
+            Standard Time of Arrival
+          </div>
+          <div class="col heading">
+            Standard Time of Departure
+          </div>
+          <div class="col heading">
+            Take Off
+          </div>
+          <div class="col heading">
+            Touch Down
+          </div>
+          <div class="col heading">
+            Delay
+          </div>
         </div>
-        <div class="col heading">
-          Arr Location
+        <app-leg-list [legs]="legs"></app-leg-list>
         </div>
-        <div class="col heading">
-          Standard Time of Arrival
+        <div *ngIf="legs.length===0">
+          <div class="row text-center" style="padding-left: 1.5em; padding-right: 2.5em;">
+            <div class="col heading">
+              No legs on this flight to display information
+            </div>
+          </div>
         </div>
-        <div class="col heading">
-          Standard Time of Departure
-        </div>
-        <div class="col heading">
-          Take Off
-        </div>
-        <div class="col heading">
-          Touch Down
-        </div>
-        <div class="col heading">
-          Delay
-        </div>
-      </div>
-      <app-leg-list [legs]="legs"></app-leg-list>
-    </ng-template>
-  </ngb-panel>
-</ngb-accordion>
-
-
+      </ng-template>
+    </ngb-panel>
+  </ngb-accordion>
+</div>

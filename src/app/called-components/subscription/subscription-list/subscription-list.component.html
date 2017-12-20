@@ -1,9 +1,12 @@
-<div class="container">
+<div class="container" *ngIf ="_user">
   <div *ngIf="loading" class="row">
     <div id="loadingIMG"></div>
     <p>Fetching information</p>
   </div>
   <div *ngFor="let subhtml of subscriptions" class="list-group-item list-group-item-action">
-    <app-subscription [subscription]="subhtml"></app-subscription>
+    <app-subscription [subscription]="subhtml" (DeleteEvent)="updateList()"></app-subscription>
+  </div>
+  <div *ngIf="noSubscriptions">
+    <p>No Subscriptions found</p>
   </div>
 </div>

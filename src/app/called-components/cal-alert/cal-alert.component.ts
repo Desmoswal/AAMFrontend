@@ -1,11 +1,12 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 import {FlightService} from '../../shared/flights/flight.service';
 import {isBoolean} from 'util';
 import {DatePipe} from '@angular/common';
 import {Flight} from '../../shared/flights/flight.model';
 import {User} from '../../shared/users/user.model';
+import {TokenService} from '../../shared/login/shared/token.service';
 
 @Component({
   selector: 'app-cal-alert',
@@ -13,7 +14,7 @@ import {User} from '../../shared/users/user.model';
   styleUrls: ['./cal-alert.component.css']
 })
 export class CalAlertComponent implements OnInit {
-  user: User;
+  @Input() _user: User;
   _dateString: string;
   _displayDate: string;
   _hasFlights: boolean = false;
@@ -22,13 +23,14 @@ export class CalAlertComponent implements OnInit {
   @Input() set recievedDate(date: Date) {
 
     if (typeof date === 'undefined') {
-      this.setDate();
+      this._dateString = this.datePipe.transform(new Date(), 'yyyyMMdd');
     }
     else {
       this._dateString = this.datePipe.transform(date, 'yyyyMMdd');
-      this._displayDate = this._dateString.slice(0, 4) + '-' + this._dateString.slice(4, 6) + '-' + this._dateString.slice(6);
+
       this.dateHasFlights();
     }
+    this._displayDate = this._dateString.slice(0, 4) + '-' + this._dateString.slice(4, 6) + '-' + this._dateString.slice(6);
   }
 
   constructor(private route: ActivatedRoute,
@@ -37,21 +39,7 @@ export class CalAlertComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getUser();
-  }
-
-  //TODO need to change this method when we have authenication, so we get the user from the backend
-  getUser() {
-    this.user = new User();
-    this.user.id = 1;
-    this.user.type = 1;
-  }
-
-  setDate() {
-    this.route.queryParams.subscribe(params => {
-      this._dateString = params.date;
-      this.dateHasFlights();
-    });
+    this.dateHasFlights();
   }
 
   dateHasFlights() {

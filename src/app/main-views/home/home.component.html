@@ -1,19 +1,19 @@
-<div class="container">
+<div class="container" *ngIf="_user">
   <div>
-    <app-navbar></app-navbar>
+    <app-navbar [isPlanner]="_user.type=== 1" [loggedIn]="true"></app-navbar>
   </div>
   <div class="viewbody">
-    <div *ngIf="user.type===1">
-      <h1>Today's Scheduled flights</h1>
-      <app-flight-list [user]="user"  ></app-flight-list>
+    <div *ngIf="_user.type===1" class="flights">
+      <h1>Today's Scheduled Flights</h1>
+      <app-flight-list [_user]="_user"  ></app-flight-list>
     </div>
-    <div *ngIf="user.type===2">
+    <div *ngIf="_user.type===2" class="flights">
       <h1>My flights</h1>
-      <app-flight-list [user]="user"></app-flight-list>
+      <app-flight-list [_user]="_user"></app-flight-list>
     </div>
-    <div *ngIf="user.type===1">
+    <div *ngIf="_user.type===1" class="subscriptions">
       <h1>Flight Watch</h1>
-      <app-subscription-list [user]="user"></app-subscription-list>
+      <app-subscription-list [_user]="_user"></app-subscription-list>
     </div>
   </div>
 </div>

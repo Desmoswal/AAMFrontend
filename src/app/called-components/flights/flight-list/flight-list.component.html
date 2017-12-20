@@ -1,10 +1,12 @@
-<div class="container">
+<div class="container" *ngIf="_user">
   <div *ngIf="loading" class="row">
     <div id="loadingIMG"></div>
     <p>Fetching information</p>
   </div>
-  <div *ngFor="let flighthtml of _flights" class="list-group-item list-group-item-action">
-    <app-flight [flight]="flighthtml" [bookingButton]="_bookingButton" [user]="user"></app-flight>
+  <input *ngIf="_user.type ==1 && _getType =='getAll'" type="text" value="" class="form-control" placeholder="Search..."
+         [(ngModel)]="searchText" _>
+  <div *ngFor="let flighthtml of _flights | search:searchText" class="list-group-item list-group-item-action">
+    <app-flight [_flight]="flighthtml" [bookingButton]="_bookingButton" [_user]="_user"></app-flight>
   </div>
   <div *ngIf="noFlights">
     <p>No flights scheduled</p>

@@ -3,6 +3,7 @@ import {Flight} from '../../../shared/flights/flight.model';
 import {FlightService} from '../../../shared/flights/flight.service';
 import {DatePipe} from '@angular/common';
 import {User} from '../../../shared/users/user.model';
+import {UserService} from '../../../shared/users/user.service';
 
 @Component({
   selector: 'app-flight-list',
@@ -19,11 +20,11 @@ export class FlightListComponent implements OnInit {
     this._specificDate = date;
   }
 
-  @Input() user: User;
+  @Input() _user: User;
 
-  @Input() set getType(getType: string) {
-    this._getType = getType;
-  }
+   @Input() set getType(getType: string) {
+     this._getType = getType;
+   }
 
   @Input() set flights(flights: Flight[]) {
     this._flights = flights;
@@ -36,7 +37,7 @@ export class FlightListComponent implements OnInit {
   noFlights = false;
   loading = false;
 
-  constructor(private flightServ: FlightService, private datePipe: DatePipe) {
+  constructor(private flightServ: FlightService, private datePipe: DatePipe, private userServ: UserService) {
 
   }
 
@@ -47,8 +48,10 @@ export class FlightListComponent implements OnInit {
   getFlights() {
     this.loading = true;
     //if it's a planner they can get all the flights or flight by date
-    if (this.user.type === 1) {
+    if (this._user.type === 1) {
+      //this means the list of flights will already be inputted
       if (typeof this._flights === 'undefined') {
+        //no specific date has been given when component is initialised, so get all flights
         if (typeof this._specificDate === 'undefined') {
           if (typeof this._getType === 'undefined') {
             //get by today's date
@@ -92,11 +95,11 @@ export class FlightListComponent implements OnInit {
       }
     }
     //normal users can only get their flights
-    if (this.user.type === 2) {
-      this.flightServ.getByUserId(this.user.id).subscribe(flights => {
+    if (this._user.type === 2) {
+      this.userServ.getById(this._user.id).subscribe(user => {
         this.loading = false;
-        this._flights = flights;
-        if (flights.length === 0) {
+        this._flights = user.flights;
+        if (user.flights.length === 0) {
           this.noFlights = true;
         }
       })

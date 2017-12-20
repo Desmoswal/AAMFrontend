@@ -1,16 +1,14 @@
 <div class="row">
-    <div class="col-md-3">First Name</div>
-    <div class="col-md-3">Second name</div>
-    <div class="col-md-6">
-      <div class="pull-right" *ngIf="!confirmDelete">
-        <button class="btn btn-outline-danger" >
-          <i class="fa fa-trash" aria-hidden="true"></i>
-          Delete</button>
-        <button class="btn btn-outline-warning">
-          <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-          Update</button>
-      </div>
+  <div class="col-md-3">{{_departureTime | date: "MMM d, y"}}</div>
+  <div *ngIf="_flightsAvail" class="col-md-3 flights">{{_stringForFlights}}</div>
+  <div *ngIf="!_flightsAvail" class="col-md-3 noFlights">{{_stringForFlights}}</div>
+  <div class="col-md-6">
+    <div class="pull-right" *ngIf="!confirmDelete">
+      <button (click)="deleteSubscription()" class="btn btn-outline-warning">
+        <i class="fa fa-trash" aria-hidden="true"></i>
+      </button>
     </div>
+  </div>
 </div>
 
 

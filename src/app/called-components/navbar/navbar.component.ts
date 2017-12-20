@@ -1,5 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {DatePipe} from '@angular/common';
+import {TokenService} from '../../shared/login/shared/token.service';
+import {LoginService} from '../../shared/login/shared/login.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -7,14 +10,22 @@ import {DatePipe} from '@angular/common';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  @Input() isPlanner: boolean;
+  @Input() loggedIn: boolean;
+  @Output() LogOut = new EventEmitter();
 
-  date: string;
-
-  constructor( private datePipe: DatePipe) {
+  constructor(private loginServ: LoginService) {
   }
 
   ngOnInit() {
-    this.date = this.datePipe.transform(new Date(), 'yyyyMMdd');
+  }
+
+  logout() {
+    this.loginServ.logout().subscribe(logoutSuccess => {
+      this.LogOut.emit(this.loggedIn = false);
+      this.LogOut.emit(this.isPlanner = false);
+    });
+
   }
 
 }

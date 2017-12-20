@@ -1,13 +1,13 @@
-<div class="container">
+<div class="container" *ngIf ="_user">
   <div>
-    <app-navbar></app-navbar>
+    <app-navbar [isPlanner]="true" [loggedIn]="true"></app-navbar>
   </div>
   <div class="row viewbody">
     <div class="col-md-6">
       <app-calendar (dateEvent)="receiveDate($event)"></app-calendar>
     </div>
     <div class="col-md-6">
-      <app-cal-alert [recievedDate]="selectedDate"></app-cal-alert>
+      <app-cal-alert [recievedDate]="selectedDate" [_user] ="_user"></app-cal-alert>
     </div>
   </div>
 </div>
