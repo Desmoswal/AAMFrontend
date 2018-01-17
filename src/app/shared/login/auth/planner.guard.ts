@@ -12,11 +12,11 @@ export class PlannerGuard implements CanActivate {
   canActivate(): any {
 
     return this.tokenServ.getUserFromToken().take(1).map(user => {
-      if (user && user.type === 1) {
+      if (user.type === 1) {
         return true;
       } else {
         // not logged in so redirect to login page with the return url
-        this.router.navigateByUrl('/login');
+        this.router.navigateByUrl('/accessdenied');
         return false;
       }
     });

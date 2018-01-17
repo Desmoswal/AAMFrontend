@@ -1,5 +1,5 @@
 <div class="container" *ngIf="_recievedDate && checkedSubs">
-  <div *ngIf="!existingSub">
+  <div *ngIf="existingSub">
     <div class="card">
       <h4 class="card-header text-center" *ngIf="!subscribed">No flights on the {{_recievedDate}}</h4>
       <div class="card-block" *ngIf="!subscribed">
@@ -18,7 +18,7 @@
       </ngb-alert>
     </div>
   </div>
-  <div *ngIf="existingSub">
+  <div *ngIf="!existingSub">
     <div class="card">
       <h4 class="card-header text-center">{{_recievedDate}}</h4>
       <div class="card-block">

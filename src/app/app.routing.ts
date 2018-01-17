@@ -7,15 +7,17 @@ import {ReserveFormDetailComponent} from './main-views/reserve-form-detail/reser
 import {MapComponent} from './called-components/map/map.component';
 import {AuthGuard} from './shared/login/auth/auth.guard';
 import {PlannerGuard} from './shared/login/auth/planner.guard';
+import {NoaccessComponent} from './main-views/noaccess/noaccess.component';
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
-  {path: 'reserve', component: ReserveFlightComponent, canActivate: [AuthGuard, PlannerGuard]},
-  {path: 'info', component: FlightInformationComponent, canActivate: [AuthGuard, PlannerGuard]},
+  {path: 'reserve', component: ReserveFlightComponent, canActivate: [PlannerGuard]},
+  {path: 'info', component: FlightInformationComponent, canActivate: [PlannerGuard]},
   {path: '', component: LoginComponent},
   {path: 'map', component: MapComponent},
-  {path: 'resdet', component: ReserveFormDetailComponent, canActivate: [AuthGuard, PlannerGuard]},
+  {path: 'resdet', component: ReserveFormDetailComponent, canActivate: [PlannerGuard]},
+  {path: 'accessdenied', component: NoaccessComponent},
   {path: '**', redirectTo: ''}
 ];
 export const routing = RouterModule.forRoot(appRoutes);

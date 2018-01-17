@@ -37,17 +37,8 @@ import {UserService} from './shared/users/user.service';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {RouterModule, Routes} from '@angular/router';
 import { SearchPipe } from './called-components/flights/flight-list/search.pipe';
+import { NoaccessComponent } from './main-views/noaccess/noaccess.component';
 
-const appRoutes: Routes = [
-  {path: 'login', component: LoginComponent},
-  {path: 'home', component: HomeComponent,   canActivate: [AuthGuard]},
-  {path: 'reserve', component: ReserveFlightComponent},
-  {path: 'info', component: FlightInformationComponent},
-  {path: '', component: LoginComponent},
-  {path: 'map', component: MapComponent},
-  {path: 'resdet', component: ReserveFormDetailComponent},
-  {path: '**', redirectTo: ''}
-];
 
 @NgModule({
   declarations: [
@@ -68,7 +59,8 @@ const appRoutes: Routes = [
     NoFlightAlertComponent,
     LegListComponent,
     ReserveFormDetailComponent,
-    SearchPipe
+    SearchPipe,
+    NoaccessComponent,
   ],
   imports: [
     ReactiveFormsModule,
@@ -77,9 +69,9 @@ const appRoutes: Routes = [
     CalendarModule.forRoot(),
     BrowserAnimationsModule,
     AngularFontAwesomeModule,
-    RouterModule.forRoot(appRoutes),
-    FormsModule,
     CommonModule,
+    routing,
+    FormsModule,
     NgbModule.forRoot(),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBdpXUElCLoC1Nf397cIzvM64Ho9YdXxxk'

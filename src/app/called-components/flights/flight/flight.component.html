@@ -8,6 +8,7 @@
           <div class="col" style="text-align: right"><b>Dept: </b> {{_departureTime | date: "MMM d, y h:mm a"}}</div>
           <div *ngIf="_bookingButton && _hasLegs" class="col">
             <button class="btn btn-primary" (click)="createReservation()">Book</button>
+
           </div>
           <div *ngIf="_bookingButton && !_hasLegs || _bookingButton && _flight.seatsAvailable<=0 " class="col">
             <button class="btn btn-secondary" [disabled]="true">Cannot book</button>

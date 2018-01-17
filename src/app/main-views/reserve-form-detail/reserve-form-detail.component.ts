@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {EmailService} from '../../shared/email/email.service';
 import {Email} from '../../shared/email/email.model';
 import 'rxjs/add/operator/switchMap';
@@ -17,57 +17,77 @@ import {Observable} from 'rxjs/Observable';
 })
 export class ReserveFormDetailComponent implements OnInit {
   model: any = new Array();
+  _sent: boolean = false;
   _bookingDate: string;
   _bookingFlightID: number;
   _user: User;
   _flight: Flight;
+  loading: boolean = false;
 
-  constructor(private router: Router,
-              private service: EmailService,
+  constructor(private service: EmailService,
               private route: ActivatedRoute,
               private userSer: UserService,
               private flightSer: FlightService,
-              private  tokServ: TokenService) {
+              private  tokServ: TokenService,
+              private router: Router) {
+    this.route.queryParams.subscribe(params => {
+      const date = params['d'];
+      this._bookingDate = date.slice(0, 4) + '-' + date.slice(4, 6) + '-' + date.slice(6);
+      this._bookingFlightID = params['f'];
+      console.log(this._bookingFlightID);
+      console.log(this._bookingDate);
+    });
   }
 
   ngOnInit() {
     this.checkUser();
   }
 
+  // checkUser() {
+  //   if (typeof this._user === 'undefined') {
+  //     if (localStorage.getItem('token')) {
+  //       this.tokServ.getUserFromToken().switchMap(outUser => Observable.create(obs1 => {
+  //         this._user = outUser;
+  //         obs1.next();
+  //         this.route.queryParams.switchMap(params => Observable.create(obs2 => {
+  //           //formated the date as yyyy-MM-dd
+  //           this._bookingDate = params.d.slice(0, 4) + '-' + params.d.slice(4, 6) + '-' + params.d.slice(6);
+  //           this._bookingFlightID = params.f;
+  //           obs2.next();
+  //           this.flightSer.getByFlightId(params.f).switchMap(flight => Observable.create(obs3 => {
+  //             this._flight = flight;
+  //             obs3.next();
+  //           }));
+  //         }));
+  //       }));
+  //     }
+  //   }
+
   checkUser() {
     if (typeof this._user === 'undefined') {
       if (localStorage.getItem('token')) {
-        this.tokServ.getUserFromToken().switchMap(outUser => Observable.create(obs1 => {
-          this._user = outUser;
-          obs1.next();
-          this.route.queryParams.switchMap(params => Observable.create(obs2 => {
-            //formated the date as yyyy-MM-dd
-            this._bookingDate = params.d.slice(0, 4) + '-' + params.d.slice(4, 6) + '-' + params.d.slice(6);
-            this._bookingFlightID = params.f;
-            obs2.next();
-            this.flightSer.getByFlightId(params.f).switchMap(flight => Observable.create(obs3 => {
-              this._flight = flight;
-              obs3.next();
-            }));
-          }));
-        }));
+        this.tokServ.getUserFromToken().subscribe(outputUser => {
+          this._user = outputUser;
+        });
+      }
+      else {
+        this.router.navigateByUrl('/login');
       }
     }
-
-
-    //   .subscribe(outputUser => {
-    //   this._user = outputUser;
-    //   this.route.queryParams.subscribe(params => {
-    //     console.log('getsinhere');
-    //     //formated the date as yyyy-MM-dd
-    //     this._bookingDate = params.d.slice(0, 4) + '-' + params.d.slice(4, 6) + '-' + params.d.slice(6);
-    //     this._bookingFlightID = params.f;
-    //     this.flightSer.getByFlightId(params.f).subscribe(flight => this._flight = flight);
-    //   });
-    //
-    // });
-
   }
+
+  //   .subscribe(outputUser => {
+  //   this._user = outputUser;
+  //   this.route.queryParams.subscribe(params => {
+  //     console.log('getsinhere');
+  //     //formated the date as yyyy-MM-dd
+  //     this._bookingDate = params.d.slice(0, 4) + '-' + params.d.slice(4, 6) + '-' + params.d.slice(6);
+  //     this._bookingFlightID = params.f;
+  //     this.flightSer.getByFlightId(params.f).subscribe(flight => this._flight = flight);
+  //   });
+  //
+  // });
+
 
   validate(formcontent: Map<any, any>, keys: Array<any>): boolean {
     let allValid: boolean = false;
@@ -93,7 +113,7 @@ export class ReserveFormDetailComponent implements OnInit {
   }
 
   send() {
-
+    this.loading = true;
     let content = new Map();
     let assignedtitles = new Map();
     let titles = [
@@ -148,7 +168,7 @@ export class ReserveFormDetailComponent implements OnInit {
 
       mail += '<p>Automated test email for a booker. This email contains the flight reserve form\'s data.</p>';
       mail += '<table>';
-      mail += '<tr><td>Flight: </td><td>' + this._flight.flightNo + '</td></tr>';
+      mail += '<tr><td>Flight: </td><td>' + this._bookingFlightID+ '</td></tr>';
       mail += '<tr><td>Requester: </td><td>' + this._user.username + '</td></tr>';
       mail += '<tr><td>Flight Date: </td><td>' + this._bookingDate + '</td></tr>';
 
@@ -174,7 +194,13 @@ export class ReserveFormDetailComponent implements OnInit {
       email.toEmailAddress = 'meng.dunmow@maerskoil.com';
       email.toName = 'Meng Dunmow';
       let result = this.service.sendemail(email);
-      result.subscribe();
+      result.subscribe(sent => {
+        this.loading = false;
+        this._sent = true;
+        setTimeout((router: Router) => {
+          this.router.navigate(['/reserve']);
+        }, 2000);
+      });
     } else {
       alert('form is not complete or has invalid data');
 

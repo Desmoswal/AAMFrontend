@@ -1,6 +1,6 @@
-<div class="container" *ngIf ="_user">
+<div class="container" *ngIf="_user">
   <div>
-    <app-navbar></app-navbar>
+    <app-navbar [isPlanner]="true" [loggedIn]="true"></app-navbar>
   </div>
   <div class="viewbody">
     <form method="post" name="form" (ngSubmit)="f.form.valid && send()" #f="ngForm">
@@ -202,12 +202,29 @@
           <input type="checkbox" name="prodassist" [(ngModel)]="model.prodassist"/>
         </div>
       </div>
-      <div class="row">
+      <div class="row" *ngIf="!_sent">
         <div class="col-md-2">
         </div>
         <div class="col-sm-4">
           <input type="submit" class="btn btn-primary" value="Submit"/>
-          <button class="btn btn-secondary" [routerLink]="['../reserve']" [queryParams]="{ date: date}" style="margin-left: 10px">Cancel</button>
+          <button class="btn btn-secondary" [routerLink]="['../reserve']" [queryParams]="{ date: date}"
+                  style="margin-left: 10px">Cancel
+          </button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-sm-2">
+          <div class="form-group">
+            <img *ngIf="loading"
+                 src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
+          </div>
+          <div class="card-block" *ngIf="_sent">
+            <ngb-alert [dismissible]="false">
+              Email request sent
+            </ngb-alert>
+          </div>
         </div>
       </div>
     </form>
