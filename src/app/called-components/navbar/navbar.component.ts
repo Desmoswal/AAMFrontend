@@ -14,7 +14,7 @@ export class NavbarComponent implements OnInit {
   @Input() loggedIn: boolean;
   @Output() LogOut = new EventEmitter();
 
-  constructor(private loginServ: LoginService) {
+  constructor(private loginServ: LoginService, private router: Router) {
   }
 
   ngOnInit() {
@@ -24,6 +24,7 @@ export class NavbarComponent implements OnInit {
     this.loginServ.logout().subscribe(logoutSuccess => {
       this.LogOut.emit(this.loggedIn = false);
       this.LogOut.emit(this.isPlanner = false);
+      this.router.navigateByUrl('/login');
     });
 
   }

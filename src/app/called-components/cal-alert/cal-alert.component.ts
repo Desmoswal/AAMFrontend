@@ -27,13 +27,11 @@ export class CalAlertComponent implements OnInit {
     }
     else {
       this._dateString = this.datePipe.transform(date, 'yyyyMMdd');
-
       this.dateHasFlights();
     }
-    this._displayDate = this._dateString.slice(0, 4) + '-' + this._dateString.slice(4, 6) + '-' + this._dateString.slice(6);
   }
 
-  constructor(private route: ActivatedRoute,
+  constructor(
               private datePipe: DatePipe,
               private flightServ: FlightService) {
   }
@@ -45,6 +43,7 @@ export class CalAlertComponent implements OnInit {
   dateHasFlights() {
     this.flightServ.getByDate(this._dateString).subscribe(
       flights => {
+        this._displayDate = this._dateString.slice(0, 4) + '-' + this._dateString.slice(4, 6) + '-' + this._dateString.slice(6);
         if (flights.length === 0) {
           this._hasFlights = false;
         }

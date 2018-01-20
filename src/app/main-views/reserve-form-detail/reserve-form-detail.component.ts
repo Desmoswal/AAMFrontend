@@ -30,6 +30,10 @@ export class ReserveFormDetailComponent implements OnInit {
               private flightSer: FlightService,
               private  tokServ: TokenService,
               private router: Router) {
+
+  }
+
+  ngOnInit() {
     this.route.queryParams.subscribe(params => {
       const date = params['d'];
       this._bookingDate = date.slice(0, 4) + '-' + date.slice(4, 6) + '-' + date.slice(6);
@@ -37,9 +41,6 @@ export class ReserveFormDetailComponent implements OnInit {
       console.log(this._bookingFlightID);
       console.log(this._bookingDate);
     });
-  }
-
-  ngOnInit() {
     this.checkUser();
   }
 
